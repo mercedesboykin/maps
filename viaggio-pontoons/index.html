@@ -4,63 +4,920 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Viaggio Pontoons × Shopify Plus</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0f0f0f;--surface:#161616;--border:#222;--text:#f0f0f0;--muted:#888;--accent:#e91e8c;--accent-light:rgba(233,30,140,.12)}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center}
-.gate{width:100%;max-width:400px;padding:2.5rem;text-align:center}
-.gate-logo{font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
-.gate-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--text);margin-bottom:.5rem}
-.gate-sub{font-size:.8rem;color:var(--muted);margin-bottom:2rem}
-.gate input{width:100%;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:1rem;letter-spacing:4px;text-align:center;outline:none;margin-bottom:.75rem}
-.gate input:focus{border-color:var(--accent)}
-.gate button{width:100%;padding:.75rem;background:var(--accent);color:#fff;border:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600}
-.gate button:hover{opacity:.9}
-.gate-err{font-size:.75rem;color:#e05;margin-top:.5rem;display:none}
-.content{display:none;max-width:860px;margin:0 auto;padding:3rem 2rem}
-.badge{font-size:.55rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-h1{font-family:'Playfair Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:.75rem}
-h1 em{color:var(--accent);font-style:italic}
-.rule{width:48px;height:2px;background:var(--accent);margin:1.5rem 0}
-.desc{font-size:.95rem;color:var(--muted);line-height:1.7;max-width:520px}
-.placeholder{margin-top:3rem;padding:2rem;border:1px solid var(--border);background:var(--surface)}
-.placeholder-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
-.placeholder-text{font-size:.85rem;color:#555;font-style:italic}
-.footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted);display:flex;justify-content:space-between}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #0066CC;
+    --blue-dark: #004E9A;
+    --blue-light: #EBF4FF;
+    --navy: #071A2E;
+    --dark: #0D2B48;
+    --border: #e5e5e5;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #F5F7FA;
+    --white: #ffffff;
+    --max: 920px;
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* ── GATE ── */
+  #gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #060F1A;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gate-box { width: 100%; max-width: 380px; padding: 2.5rem; text-align: center; }
+  .gate-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #0066CC; margin-bottom: 24px; }
+  .gate-title { font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .gate-sub { font-size: 13px; color: #666; margin-bottom: 28px; }
+  .gate-box input {
+    width: 100%; padding: 12px 16px; background: #0D1E30; border: 1px solid #1E3A5A;
+    color: #fff; font-size: 14px; text-align: center; letter-spacing: 4px;
+    outline: none; border-radius: 6px; margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .gate-box input:focus { border-color: var(--blue); }
+  .gate-box input::placeholder { letter-spacing: 2px; color: #444; }
+  .gate-btn {
+    width: 100%; padding: 13px; background: var(--blue); color: white;
+    border: none; border-radius: 6px; font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .gate-btn:hover { background: var(--blue-dark); }
+  .gate-err { font-size: 12px; color: #ff4444; margin-top: 8px; display: none; }
+
+  /* ── MAIN ── */
+  #main { display: none; }
+
+  /* ── CENTERING ── */
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    border-bottom: 4px solid var(--blue);
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 400px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(0,102,204,0.08));
+    pointer-events: none;
+  }
+  .header .wrap { padding-top: 60px; padding-bottom: 48px; text-align: center; }
+  .header-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+  .header h1 { font-size: 60px; font-weight: 800; color: var(--white); letter-spacing: -2px; line-height: 1.05; }
+  .header h1 span { color: var(--blue); }
+  .header-sub { color: #7a9ab8; font-size: 13.5px; margin-top: 12px; }
+  .header-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+  .badge-blue { background: var(--blue); color: white; }
+  .badge-outline { border: 1.5px solid #2a4a6a; color: #7a9ab8; }
+
+  /* ── TABS ── */
+  .tab-nav { background: var(--dark); border-bottom: 1px solid #1a3850; position: sticky; top: 0; z-index: 100; }
+  .tab-nav .wrap { display: flex; gap: 2px; overflow-x: auto; padding-top: 0; padding-bottom: 0; }
+  .tab-nav .wrap::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 16px 20px; border: none; background: none; cursor: pointer; font-size: 13.5px; font-weight: 600; color: #6a92b8; border-bottom: 3px solid transparent; white-space: nowrap; letter-spacing: 0.2px; transition: color 0.15s; flex-shrink: 0; }
+  .tab-btn:hover { color: #aac8e8; }
+  .tab-btn.active { color: var(--white); border-bottom-color: var(--blue); }
+
+  /* ── CONTENT ── */
+  .content { padding: 40px 0 80px; }
+  .content .wrap { padding-top: 0; padding-bottom: 0; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-header { margin-bottom: 28px; }
+  .section-header h2 { font-size: 32px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; line-height: 1.15; }
+  .section-header h2 .accent { color: var(--blue); }
+  .section-header p { font-size: 15px; color: var(--muted); margin-top: 8px; max-width: 620px; }
+  .divider { width: 48px; height: 4px; background: var(--blue); border-radius: 2px; margin: 12px 0 16px; }
+
+  /* ── CARDS ── */
+  .card { background: var(--white); border-radius: 12px; padding: 28px 32px; margin-bottom: 18px; border: 1px solid var(--border); }
+  .card-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+  .card h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+  .card p { font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  /* ── LISTS ── */
+  ul, ol { padding-left: 20px; }
+  li { font-size: 14.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.6; }
+  li strong { color: var(--text); }
+
+  /* ── CALLOUTS ── */
+  .callout { padding: 16px 20px; border-radius: 0 10px 10px 0; margin: 16px 0; }
+  .callout-blue { background: var(--blue-light); border-left: 4px solid var(--blue); }
+  .callout-blue p { color: #003A78; font-size: 14px; }
+  .callout-dark { background: #f7f7f7; border-left: 4px solid var(--navy); }
+  .callout-dark p { color: var(--muted); font-size: 14px; }
+  .callout-amber { background: #fffbeb; border-left: 4px solid #f59e0b; }
+  .callout-amber p { color: #78350f; font-size: 14px; }
+
+  /* ── STAT ROW ── */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; }
+  .stat { background: var(--white); padding: 24px 28px; }
+  .stat-value { font-size: 32px; font-weight: 800; color: var(--navy); letter-spacing: -1px; line-height: 1; }
+  .stat-value .unit { font-size: 18px; color: var(--blue); }
+  .stat-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 6px; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 700; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; }
+  td { padding: 11px 16px; border-bottom: 1px solid #f0f0f0; color: var(--muted); vertical-align: top; }
+  td:first-child { font-weight: 600; color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbff; }
+  .yes { color: #16a34a; font-weight: 700; }
+  .custom { color: #d97706; font-weight: 600; }
+  .partial { color: #9333ea; font-weight: 600; }
+  .no { color: #dc2626; font-weight: 600; }
+  .compare-header-shopify { background: var(--blue) !important; }
+  .compare-header-nc { background: #2d2d2d !important; }
+
+  /* ── RFI ANSWER BADGES ── */
+  .ans { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .ans-native { background: #dcfce7; color: #166534; }
+  .ans-custom { background: #fef3c7; color: #92400e; }
+  .ans-3p { background: #dbeafe; color: #1e40af; }
+  .ans-partial { background: #f3e8ff; color: #6b21a8; }
+  .ans-confirm { background: #fee2e2; color: #991b1b; }
+  .rfi-domain { background: var(--navy); color: white; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 16px; border-radius: 6px 6px 0 0; margin-top: 20px; }
+  .rfi-table { border-radius: 0 0 10px 10px; overflow: hidden; margin-bottom: 4px; }
+  .rfi-table th:first-child { width: 60%; }
+  .rfi-table th:last-child { width: 20%; }
+
+  /* ── WIN ITEMS ── */
+  .win-list { list-style: none; padding: 0; }
+  .win-item { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 22px 28px; margin-bottom: 14px; display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start; }
+  .win-num { width: 36px; height: 36px; background: var(--blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+  .win-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+  .win-req { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+  .win-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* ── FEATURE GRID ── */
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; }
+  .feature-item { background: var(--white); padding: 22px 24px; }
+  .feature-icon { font-size: 22px; margin-bottom: 8px; }
+  .feature-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .feature-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ── TIMELINE ── */
+  .timeline { list-style: none; padding: 0; }
+  .timeline li { padding: 18px 0 18px 52px; position: relative; border-left: 2px solid var(--border); margin-left: 16px; cursor: pointer; user-select: none; transition: background 0.1s; }
+  .timeline li:hover { background: rgba(0,102,204,0.03); }
+  .timeline li:last-child { border-left-color: transparent; }
+  .timeline li::before { content: attr(data-step); position: absolute; left: -18px; top: 18px; width: 32px; height: 32px; background: var(--blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; transition: background 0.15s, transform 0.1s; }
+  .timeline li:hover::before { transform: scale(1.1); }
+  .timeline li.done::before { background: #22c55e; }
+  .timeline li.done h4 { color: var(--muted); }
+  .timeline li h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .timeline li p { font-size: 13.5px; color: var(--muted); }
+  .timeline-hint { font-size: 12px; color: #aaa; margin-bottom: 14px; }
+
+  /* ── DATE CHIPS ── */
+  .step-date { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 12px; border-radius: 20px; margin-bottom: 8px; cursor: pointer; border: 1.5px dashed transparent; transition: border-color 0.12s, background 0.12s; min-width: 60px; line-height: 1.6; }
+  .step-date.has-date { color: var(--blue); background: var(--blue-light); }
+  .step-date.no-date { color: #bbb; background: #f5f5f5; }
+  .step-date:hover { border-color: var(--blue); }
+  .step-date.editing { border-style: solid; border-color: var(--blue); background: white; color: var(--text); outline: none; cursor: text; }
+
+  /* ── CHIPS ── */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .chip { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .chip-blue { background: var(--blue-light); color: var(--blue-dark); }
+  .chip-dark { background: #f0f0f0; color: #444; }
+
+  /* ── BUTTON ── */
+  .btn-blue { display: inline-block; background: var(--blue); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; margin-top: 8px; }
+  .btn-blue:hover { background: var(--blue-dark); text-decoration: none; }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .footer { text-align: center; color: #aaa; font-size: 12px; padding: 24px 0 40px; border-top: 1px solid var(--border); margin-top: 20px; }
+
+  @media (max-width: 720px) {
+    .header h1 { font-size: 36px; }
+    .content { padding: 28px 0 60px; }
+    .grid-2, .feature-grid, .stat-row { grid-template-columns: 1fr; }
+    .card { padding: 20px; }
+    .section-header h2 { font-size: 24px; }
+    .win-item { grid-template-columns: 32px 1fr; gap: 12px; padding: 18px 20px; }
+  }
 </style>
 </head>
 <body>
 
-<div id="gate" class="gate">
-  <div class="gate-logo">Shopify Plus · Confidential</div>
-  <div class="gate-title">Viaggio Pontoons</div>
-  <div class="gate-sub">Enter passcode to view</div>
-  <input type="password" id="pw" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter')unlock()">
-  <button onclick="unlock()">View Proposal</button>
-  <div class="gate-err" id="err">Incorrect passcode</div>
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-eyebrow">Shopify Plus · Confidential</div>
+    <div class="gate-title">Viaggio Pontoons</div>
+    <div class="gate-sub">Platform evaluation prepared by Shopify</div>
+    <input type="password" id="pw" placeholder="••••••" maxlength="24"
+      onkeydown="if(event.key==='Enter')unlock()">
+    <button class="gate-btn" onclick="unlock()">View Evaluation</button>
+    <div class="gate-err" id="err">Incorrect passcode — check with your Shopify contact.</div>
+  </div>
 </div>
 
-<div id="content" class="content">
-  <div class="badge">Shopify Plus · Proposal</div>
-  <h1>Viaggio Pontoons<br>× <em>Shopify Plus</em></h1>
-  <div class="rule"></div>
-  <p class="desc">Prepared for Nathaniel Talbot and the Viaggio Pontoons team by Mercedes Boykin-Sabalones, Solutions Engineer at Shopify.</p>
+<!-- MAIN -->
+<div id="main">
 
-  <div class="placeholder">
-    <div class="placeholder-label">Proposal Content</div>
-    <div class="placeholder-text">B2B dealer portal architecture, multi-brand platform design, TCO analysis, and implementation roadmap coming soon.</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="wrap">
+    <div class="header-eyebrow">Platform Evaluation · May 2026</div>
+    <h1>Viaggio Pontoons<br><span>× Shopify Plus</span></h1>
+    <div class="header-sub">Prepared by Mercedes Boykin-Sabalones · Account Executive, Shopify Commercial B2B · For Nathaniel Talbot &amp; the Viaggio Team</div>
+    <div class="header-badges">
+      <span class="badge badge-blue">B2B Dealer Portal + D2C Owner Portal</span>
+      <span class="badge badge-outline">Target Go-Live: Aug 2027</span>
+      <span class="badge badge-outline">~137 Dealers · 4 Brands in Scope</span>
+      <span class="badge badge-outline">Confidential</span>
+    </div>
   </div>
+</div>
 
+<!-- TABS -->
+<div class="tab-nav">
+  <div class="wrap">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('delivers',this)">Shopify Delivers</button>
+    <button class="tab-btn" onclick="show('rfi',this)">Platform Capabilities</button>
+    <button class="tab-btn" onclick="show('compare',this)">Shopify vs SuiteCommerce</button>
+    <button class="tab-btn" onclick="show('map',this)">Mutual Action Plan</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="wrap">
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-panel active">
+      <div class="section-header">
+        <h2>Evaluation <span class="accent">Overview</span></h2>
+        <div class="divider"></div>
+        <p>Viaggio is a multi-brand marine manufacturer evaluating Shopify Plus as the unified platform for a B2B dealer portal and D2C boat owner experience — built once, extended across four brands.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-value">137<span class="unit"> dlrs</span></div>
+          <div class="stat-label">US Dealer Network</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4<span class="unit"> brands</span></div>
+          <div class="stat-label">Viaggio · Lakota · SMC · Duo Form</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Aug<span class="unit"> '27</span></div>
+          <div class="stat-label">Target Go-Live (MY2028)</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Who They Are</div>
+        <h3>Multi-Brand Manufacturer, Bristol Indiana — 137 Dealers Across the US</h3>
+        <p>Viaggio Pontoons is the lead brand in a portfolio of four manufactured goods companies operating out of Bristol, Indiana — alongside Lakota Trailers, SMC, and Duo Form. Nathaniel Talbot, Director of IT and ERP Solutions Manager, is a team of one managing a 15-year career in enterprise IT and a vision that runs well beyond a single brand: <strong>build a platform once for Viaggio, then extend it to Lakota, SMC, and Duo Form without rebuilding middleware.</strong> Their current platform, NetSuite SuiteCommerce (~$35K/yr), was explicitly described as "never designed for B2B" by NetSuite's own engineers. Simple UI changes take 6+ months through third-party developers. The goal is a unified Shopify B2B dealer portal and D2C boat owner portal on a single platform — with a rule-based boat configurator, lot inventory management, and two-phase dealer registration — timed to the Model Year 2028 launch.</p>
+        <div class="chips">
+          <span class="chip chip-blue">B2B Dealer Portal</span>
+          <span class="chip chip-blue">D2C Boat Owner Portal</span>
+          <span class="chip chip-dark">Boat Configurator</span>
+          <span class="chip chip-dark">NetSuite Integration</span>
+          <span class="chip chip-dark">PWA for Mobile Registration</span>
+          <span class="chip chip-dark">WordPress Embed</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Why They're Moving</div>
+          <ul>
+            <li><strong>SuiteCommerce never designed for B2B</strong> — Nathaniel heard this from NetSuite's own engineers. The current platform fights every dealer workflow.</li>
+            <li>As a team of one, <strong>simple front-end changes take 6 months</strong> via third-party devs. Maintaining the current platform is a drain on the only IT resource in the building.</li>
+            <li>No path to a headless configurator, no PWA support, no dealer lot inventory management — these requirements simply don't exist in the SuiteCommerce architecture.</li>
+            <li>The replication goal — build for Viaggio, extend to three more brands — is impossible in SuiteCommerce's tightly coupled architecture.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">What They Need to Build</div>
+          <ul>
+            <li><strong>Dealer configurator</strong> — rule-based option logic, MSRP / dealer-cost dual pricing, model-year versioning, embeddable in WordPress</li>
+            <li><strong>B2B dealer portal</strong> — 137 dealers, lot inventory as hull records, two-phase delivery registration, e-signature, NetSuite write-back</li>
+            <li><strong>D2C owner portal</strong> — boat owner warranty registration, model-year ownership docs, recall notices</li>
+            <li><strong>Mobile PWA</strong> — installable, camera access for bill of sale + QR scan, offline registration queue</li>
+            <li><strong>NetSuite integration</strong> — bidirectional RESTlet integration, Nathaniel's team has expertise</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Nathaniel's Stated Requirements for a Partner</div>
+        <div class="callout callout-blue" style="margin-top: 0;">
+          <p><strong>"Current tech standards. No IP lock-in. No AI buzzwords."</strong> — Nathaniel Talbot, Director of IT, Viaggio Pontoons · May 2026</p>
+        </div>
+        <p style="margin-top: 12px;">Nathaniel has already built a 5-year cost analysis pitching Shopify internally to Eric (Owner), the CFO, Head of Sales, and Head of Customer Service. He walked into this evaluation having done the internal work. The pitch happened the week of May 12 — the Viaggio leadership team is engaged and informed.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Project Team</div>
+        <table>
+          <tr><th>Name</th><th>Role</th><th>Company</th></tr>
+          <tr><td>Nathaniel Talbot</td><td>Director of IT / ERP Solutions Manager</td><td>Viaggio Pontoons / Lakota Trailers</td></tr>
+          <tr><td>Eric (last name TBD)</td><td>Owner</td><td>Viaggio Pontoons</td></tr>
+          <tr><td>TBD</td><td>CFO / Corporate Controller</td><td>Viaggio Pontoons</td></tr>
+          <tr><td>TBD</td><td>Head of Sales</td><td>Viaggio Pontoons</td></tr>
+          <tr><td>TBD</td><td>Head of Customer Service</td><td>Viaggio Pontoons</td></tr>
+          <tr><td>Joe Hemingway</td><td>Account Executive</td><td>Shopify</td></tr>
+          <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, Commercial B2B</td><td>Shopify</td></tr>
+          <tr><td>Jordan Murphy</td><td>Solutions Engineer, B2B Specialist</td><td>Shopify</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SHOPIFY DELIVERS -->
+    <div id="delivers" class="tab-panel">
+      <div class="section-header">
+        <h2>Shopify <span class="accent">Delivers</span></h2>
+        <div class="divider"></div>
+        <p>Eight requirements from Viaggio's RFI where Shopify Plus meets or exceeds expectations — natively or with a clear, well-scoped build pattern.</p>
+      </div>
+
+      <ul class="win-list">
+
+        <li class="win-item">
+          <div class="win-num">1</div>
+          <div class="win-body">
+            <div class="win-req">Section 9.2 · B2B Dealer Portal</div>
+            <div class="win-title">137 Dealers, Multi-Tenant Isolation — Native</div>
+            <div class="win-desc">Each dealer is a Company in Shopify B2B — with their own Company Location, Contacts, price list, and payment terms. Data isolation between dealers is enforced at the platform level. A dealer logged in cannot see another dealer's orders, inventory, or registration data. Shopify Plus B2B Company Accounts are designed for exactly this architecture. No custom multi-tenancy code required.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">2</div>
+          <div class="win-body">
+            <div class="win-req">Section 9.1 · Dealer Configurator</div>
+            <div class="win-title">Rule-Based Configurator on Hydrogen + Shopify Infrastructure</div>
+            <div class="win-desc">Shopify doesn't sell a boat configurator. What it provides is the platform to build one correctly: <strong>Storefront API</strong> for commerce data, <strong>Shopify Functions</strong> for business logic evaluation, <strong>Metaobjects</strong> as the structured rule store (editable by Viaggio admins without a code deployment), and <strong>Hydrogen</strong> as the React framework. The configurator lives as a headless application on Vercel — independent from the storefront, embeddable anywhere, and not constrained by Shopify's checkout flow. This is the architecture that meets every configurator requirement in the RFI.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">3</div>
+          <div class="win-body">
+            <div class="win-req">Section 9.1.4 · Dual Pricing</div>
+            <div class="win-title">MSRP / Dealer Cost Dual Pricing — Native, No Custom Code</div>
+            <div class="win-desc">An unauthenticated visitor to the public configurator sees MSRP. A dealer who logs into their B2B portal session sees their dealer cost. Shopify B2B price lists respond to the authenticated session context automatically — the same configurator serves both audiences. This is a core feature of Shopify B2B, not a workaround.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">4</div>
+          <div class="win-body">
+            <div class="win-req">Section 9.1.5 · WordPress Embed</div>
+            <div class="win-title">Configurator Embeds in WordPress — WordPress Stays Unchanged</div>
+            <div class="win-desc">Because the configurator is a headless application on Vercel, it is completely independent of Shopify's storefront layer. It can be embedded in any web context — including the current WordPress site — via iframe or a lightweight JavaScript initialization script that passes model ID, user role, and authentication context. WordPress does not need to be migrated or rebuilt. This is an architectural property of headless, not a feature request.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">5</div>
+          <div class="win-body">
+            <div class="win-req">Section 9.3 · NetSuite Integration</div>
+            <div class="win-title">Integration Pattern Nathaniel's Team Already Knows</div>
+            <div class="win-desc">Shopify does not call NetSuite directly — and that's by design. A Vercel serverless function layer sits between Shopify webhooks (order created, registration submitted, boat shipped) and NetSuite RESTlets. NetSuite credentials live in Vercel environment variables, never visible in the browser. Nathaniel's team has RESTlet expertise — they are well-positioned to own or co-develop this layer. The pattern is familiar, the stack is standard, and no Shopify constraint prevents any of the integration flows described in the RFI.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">6</div>
+          <div class="win-body">
+            <div class="win-req">Section 9.2.4 · Lot Inventory</div>
+            <div class="win-title">Hull Records as Metaobjects — Not a Product Catalog</div>
+            <div class="win-desc">Hull IDs are not products. They're records — with a hull ID, model, year, options, status, dealer assignment, and lot entry date. Shopify Metaobjects model this precisely: Admin API creates a hull record when NetSuite fires a "boat shipped" webhook, updates it when the registration is submitted, and marks it "sold" when a retail registration completes. Dealers see their live lot via the portal. Nothing gets forced into a product catalog paradigm it doesn't fit. The architecture is purpose-built for Viaggio's lot management workflow.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">7</div>
+          <div class="win-body">
+            <div class="win-req">Section 9.4 · Mobile PWA</div>
+            <div class="win-title">Installable PWA — No App Store, Camera Access, Offline Queue</div>
+            <div class="win-desc">A Hydrogen + Next.js application on Vercel supports full PWA capability: installable to home screen on iOS and Android with no App Store submission, camera access via the browser MediaDevices API (bill of sale photograph, hull ID QR scan, delivery photos), and an offline service worker + IndexedDB queue for registration submissions at boat shows or dealer lots with poor connectivity. These are standard web platform capabilities — not Shopify-specific features — and they work correctly in the recommended headless stack.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">8</div>
+          <div class="win-body">
+            <div class="win-req">Nathaniel's Explicit Requirement</div>
+            <div class="win-title">No IP Lock-In. Current Tech Standards. Architecture Replicates to All Four Brands.</div>
+            <div class="win-desc">Everything Shopify stores is accessible via Admin API — products, orders, customers, Metaobjects, company accounts — exportable at any time in standard formats. The configurator is a React/Next.js application, no proprietary framework. Rules are stored as JSON in Metaobjects. If Viaggio migrates off Shopify, they keep the configurator and the rules. For multi-brand replication: one Shopify Organization, expansion stores per brand (Viaggio → Lakota → SMC → Duo Form), shared middleware. The architecture Nathaniel designs for Viaggio is, by default, the architecture he extends to the other three brands without rebuilding anything.</div>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="callout callout-dark" style="margin-top: 8px;">
+        <p><strong>What requires custom development:</strong> The configurator UI, multi-step delivery registration workflow, lot inventory interface, e-signature integration, two-phase registration state machine, offline service worker, and push notification layer are all custom builds on top of Shopify's platform infrastructure. This is expected for a project of this scope. The platform provides the commerce layer, data layer, and API surface — the applications that run on top are purpose-built for Viaggio.</p>
+      </div>
+    </div>
+
+    <!-- PLATFORM CAPABILITIES (RFI) -->
+    <div id="rfi" class="tab-panel">
+      <div class="section-header">
+        <h2>Platform <span class="accent">Capabilities</span></h2>
+        <div class="divider"></div>
+        <p>Shopify's responses to Viaggio's Section 9 vendor questionnaire. Full written responses available in the formal RFI document.</p>
+      </div>
+
+      <div class="callout callout-amber">
+        <p><strong>Legend:</strong> <span class="ans ans-native">Native</span> = included in Shopify Plus &nbsp; <span class="ans ans-custom">Custom build</span> = requires implementation work &nbsp; <span class="ans ans-3p">3rd party</span> = app or integration required &nbsp; <span class="ans ans-partial">Partial</span> = native capability, UI or extension needed &nbsp; <span class="ans ans-confirm">Confirm</span> = pending account team review</p>
+      </div>
+
+      <div class="rfi-domain">9.1 — Configurator &amp; Product Catalog</div>
+      <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
+        <table>
+          <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
+          <tr><td>Rule-based product configurator with conditional option logic</td><td><span class="ans ans-custom">Custom build</span></td><td>Hydrogen + Storefront API + Shopify Functions</td></tr>
+          <tr><td>Rules stored outside front-end code (no redeploy to update)</td><td><span class="ans ans-native">Native</span></td><td>Shopify Metaobjects — editable via admin UI or API</td></tr>
+          <tr><td>Model-year versioning for same product family</td><td><span class="ans ans-custom">Custom build</span></td><td>Metaobject schema — designed from day one of implementation</td></tr>
+          <tr><td>Dual pricing: MSRP public / dealer cost authenticated</td><td><span class="ans ans-native">Native</span></td><td>Shopify B2B price lists respond to session context automatically</td></tr>
+          <tr><td>Embed in WordPress without rebuilding WordPress</td><td><span class="ans ans-native">Native</span></td><td>Headless app = embeds anywhere via iframe or JS script</td></tr>
+          <tr><td>GLTF 3D models with real-time material updates</td><td><span class="ans ans-3p">3rd party</span></td><td>model-viewer / Three.js within the Hydrogen front-end</td></tr>
+        </table>
+      </div>
+
+      <div class="rfi-domain">9.2 — Dealer Portal &amp; Multi-Tenant Access</div>
+      <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
+        <table>
+          <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
+          <tr><td>Multi-tenant dealer accounts with data isolation</td><td><span class="ans ans-native">Native</span></td><td>Shopify Company Accounts — platform-enforced isolation</td></tr>
+          <tr><td>Dealer admin manages own users without Viaggio involvement</td><td><span class="ans ans-partial">Partial</span></td><td>Native capability; polished self-service UI requires custom build</td></tr>
+          <tr><td>Viaggio staff see all accounts; dealers see only their own</td><td><span class="ans ans-native">Native</span></td><td>Shopify Admin vs. buyer portal — access model is enforced by the platform</td></tr>
+          <tr><td>Lot inventory as live, API-updated hull records</td><td><span class="ans ans-custom">Custom build</span></td><td>Metaobjects + Admin API — not a product catalog use case</td></tr>
+          <tr><td>Multi-step two-phase registration workflow</td><td><span class="ans ans-custom">Custom build</span></td><td>Custom app; Shopify as data persistence layer</td></tr>
+          <tr><td>E-signature capture on mobile</td><td><span class="ans ans-3p">3rd party</span></td><td>DocuSign / Dropbox Sign — embedded in delivery registration flow</td></tr>
+        </table>
+      </div>
+
+      <div class="rfi-domain">9.3 — NetSuite Integration</div>
+      <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
+        <table>
+          <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
+          <tr><td>Existing NetSuite connector</td><td><span class="ans ans-3p">3rd party</span></td><td>Celigo / Folio3 for standard DTC flows; dealer + registration flows require custom integration</td></tr>
+          <tr><td>Outbound calls to NetSuite RESTlets from platform</td><td><span class="ans ans-custom">Custom build</span></td><td>Vercel serverless middleware — standard pattern, compatible with Nathaniel's RESTlet experience</td></tr>
+          <tr><td>Inbound webhooks from NetSuite (e.g. boat shipped → dealer lot)</td><td><span class="ans ans-custom">Custom build</span></td><td>Standard webhook receiver on Vercel; no Shopify restriction</td></tr>
+          <tr><td>NetSuite credentials never exposed client-side</td><td><span class="ans ans-native">Native</span></td><td>Architecture guarantee — Vercel env vars; browser never sees credentials</td></tr>
+          <tr><td>Shopify ↔ NetSuite sync (NetSuite as system of record)</td><td><span class="ans ans-custom">Custom build</span></td><td>Scheduled sync job (Vercel Cron) — configurable cadence</td></tr>
+          <tr><td>Orders create NetSuite sales orders with option codes</td><td><span class="ans ans-custom">Custom build</span></td><td>Order translation + RESTlet write via serverless — one-time mapping design</td></tr>
+        </table>
+      </div>
+
+      <div class="rfi-domain">9.4 — Mobile &amp; PWA</div>
+      <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
+        <table>
+          <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
+          <tr><td>PWA installable without App Store submission</td><td><span class="ans ans-native">Native</span></td><td>Hydrogen + Next.js on Vercel — full PWA support, no App Store</td></tr>
+          <tr><td>Camera access for document upload and QR scanning</td><td><span class="ans ans-native">Native</span></td><td>Browser MediaDevices API — web standard, works in PWA</td></tr>
+          <tr><td>Offline form submission with local queue and retry</td><td><span class="ans ans-custom">Custom build</span></td><td>Service worker + IndexedDB — standard PWA pattern</td></tr>
+          <tr><td>Push notifications to PWA users (recalls, registration reminders)</td><td><span class="ans ans-3p">3rd party</span></td><td>Firebase Cloud Messaging — iOS 16.4+ and Android supported</td></tr>
+        </table>
+      </div>
+
+      <div class="rfi-domain">9.5 — Pricing, Plans &amp; Commercial Terms</div>
+      <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
+        <table>
+          <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
+          <tr><td>Required plan tier</td><td><span class="ans ans-native">Shopify Plus</span></td><td>B2B, Hydrogen, Functions, Admin API all included at Plus</td></tr>
+          <tr><td>Transaction fees on dealer orders</td><td><span class="ans ans-confirm">Confirm</span></td><td>Net-terms B2B orders bypass payment gateway — no fee applies. Pending account team confirmation.</td></tr>
+          <tr><td>Hard limits on dealer accounts / users / SKUs</td><td><span class="ans ans-native">None</span></td><td>Shopify Plus supports thousands of B2B accounts; no limit at 137 dealers</td></tr>
+          <tr><td>ToS restrictions on dealer-only ordering system</td><td><span class="ans ans-native">None</span></td><td>B2B dealer portals are a native, supported use case</td></tr>
+          <tr><td>Contract term + data portability</td><td><span class="ans ans-native">Annual</span></td><td>All data exportable via Admin API — full portability, no lock-in</td></tr>
+          <tr><td>Features requiring enterprise agreement beyond Plus</td><td><span class="ans ans-confirm">Confirm</span></td><td>Standard Plus covers core requirements — confirming with account team</td></tr>
+        </table>
+      </div>
+
+      <div class="rfi-domain">9.6 — Implementation &amp; Support</div>
+      <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
+        <table>
+          <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
+          <tr><td>Implementation services or certified partner recommendations</td><td><span class="ans ans-3p">Partner-led</span></td><td>2–3 vetted Shopify Plus agencies with marine / dealer / RV experience — shortlist in progress</td></tr>
+          <tr><td>Typical implementation timeline for this scope</td><td><span class="ans ans-native">12–18 months</span></td><td>Aug 2027 achievable — partner scoping must begin Q3 2026</td></tr>
+          <tr><td>Technical support at Plus tier</td><td><span class="ans ans-native">24/7 Priority</span></td><td>Phone, chat, email + dedicated Merchant Success Manager</td></tr>
+          <tr><td>Reference customers in marine / powersports / RV</td><td><span class="ans ans-confirm">Confirm</span></td><td>Available subject to merchant consent — confirming with account team</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SHOPIFY VS SUITECOMMERCE -->
+    <div id="compare" class="tab-panel">
+      <div class="section-header">
+        <h2>Shopify Plus vs <span class="accent">NetSuite SuiteCommerce</span></h2>
+        <div class="divider"></div>
+        <p>A direct comparison across the capabilities that matter most for Viaggio's B2B dealer portal and configurator requirements.</p>
+      </div>
+
+      <div class="callout callout-blue" style="margin-bottom: 20px;">
+        <p><strong>Context:</strong> Nathaniel confirmed that NetSuite engineers told him SuiteCommerce was "never designed for B2B." Simple UI changes currently take 6+ months through third-party developers at ~$35K/yr in platform licensing. This comparison reflects Viaggio's real experience, not a theoretical evaluation.</p>
+      </div>
+
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table>
+          <tr>
+            <th style="width: 40%;">Capability</th>
+            <th class="compare-header-shopify" style="width: 30%;">Shopify Plus</th>
+            <th class="compare-header-nc" style="width: 30%;">NetSuite SuiteCommerce</th>
+          </tr>
+          <tr>
+            <td>Designed for B2B dealer commerce</td>
+            <td class="yes">✓ Purpose-built</td>
+            <td class="no">✗ "Never designed for B2B" — NetSuite engineers</td>
+          </tr>
+          <tr>
+            <td>Admin UI changes without developers</td>
+            <td class="yes">✓ Shopify admin — instant</td>
+            <td class="no">✗ 6+ months via third-party devs</td>
+          </tr>
+          <tr>
+            <td>Native B2B company accounts + price lists</td>
+            <td class="yes">✓ Included with Plus</td>
+            <td class="partial">⚠️ Requires SuiteCommerce customization</td>
+          </tr>
+          <tr>
+            <td>Headless / composable front-end architecture</td>
+            <td class="yes">✓ Hydrogen — standard React/Next.js stack</td>
+            <td class="no">✗ Tightly coupled to NetSuite infrastructure</td>
+          </tr>
+          <tr>
+            <td>Configurator embeds in WordPress</td>
+            <td class="yes">✓ Headless = embeds anywhere</td>
+            <td class="no">✗ Not architecturally feasible</td>
+          </tr>
+          <tr>
+            <td>PWA support (installable, camera, offline)</td>
+            <td class="yes">✓ Hydrogen + Vercel — full PWA</td>
+            <td class="no">✗ No PWA support</td>
+          </tr>
+          <tr>
+            <td>Net terms B2B ordering (no transaction fee)</td>
+            <td class="yes">✓ Native — net terms bypass gateway</td>
+            <td class="partial">⚠️ Available via configuration</td>
+          </tr>
+          <tr>
+            <td>Metaobjects for hull inventory and rule storage</td>
+            <td class="yes">✓ Native — flexible structured data</td>
+            <td class="no">✗ No equivalent flexible data layer</td>
+          </tr>
+          <tr>
+            <td>NetSuite integration</td>
+            <td class="yes">✓ Vercel serverless + RESTlets (Nathaniel's team can own this)</td>
+            <td class="yes">✓ Native (same system)</td>
+          </tr>
+          <tr>
+            <td>Architecture replicates to Lakota, SMC, Duo Form</td>
+            <td class="yes">✓ One Shopify Org, expansion stores per brand</td>
+            <td class="no">✗ Each brand requires separate SuiteCommerce instance</td>
+          </tr>
+          <tr>
+            <td>No IP lock-in (data portability)</td>
+            <td class="yes">✓ Full API export; no proprietary lock</td>
+            <td class="no">✗ Data locked in NetSuite schemas</td>
+          </tr>
+          <tr>
+            <td>Global partner ecosystem for complex builds</td>
+            <td class="yes">✓ Largest certified partner network in the world</td>
+            <td class="no">✗ Very limited SuiteCommerce specialists</td>
+          </tr>
+          <tr>
+            <td>Platform investment velocity</td>
+            <td class="yes">✓ Quarterly B2B feature releases (Shopify Editions)</td>
+            <td class="no">✗ Commerce secondary to ERP roadmap</td>
+          </tr>
+          <tr>
+            <td>Annual platform cost</td>
+            <td class="yes">✓ Shopify Plus — scalable pricing</td>
+            <td class="no">✗ ~$35K/yr with constrained capabilities</td>
+          </tr>
+          <tr>
+            <td>Uptime SLA</td>
+            <td class="yes">✓ 99.99% — shopifystatus.com</td>
+            <td class="partial">⚠️ Hosted on NetSuite infrastructure</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="card">
+          <div class="card-title">Where Shopify Wins Outright</div>
+          <ul>
+            <li><strong>Architecture flexibility</strong> — headless, composable, embeddable. SuiteCommerce is a monolith.</li>
+            <li><strong>Developer ecosystem</strong> — hiring for React/Next.js is a global talent pool. Hiring for SuiteCommerce is a niche market.</li>
+            <li><strong>Multi-brand replication</strong> — Shopify Organization was designed for exactly what Nathaniel described. SuiteCommerce was not.</li>
+            <li><strong>Speed of change</strong> — Nathaniel can update Shopify admin settings in minutes. SuiteCommerce changes require third-party engagement.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Where NetSuite Has an Edge</div>
+          <ul>
+            <li><strong>Native ERP connection</strong> — same vendor, same system. No middleware required for basic catalog and order sync. Shopify closes this gap with the Vercel integration layer, but it is a build.</li>
+            <li><strong>Existing relationship</strong> — Viaggio is already on NetSuite for ERP. The SuiteCommerce path would be a lighter integration. Shopify's path is more powerful but requires more integration design work upfront.</li>
+          </ul>
+          <div class="callout callout-dark" style="margin-top: 14px;">
+            <p>Nathaniel's own 5-year cost analysis concluded that Shopify is the right platform. This comparison reinforces why.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MUTUAL ACTION PLAN -->
+    <div id="map" class="tab-panel">
+      <div class="section-header">
+        <h2>Mutual <span class="accent">Action Plan</span></h2>
+        <div class="divider"></div>
+        <p>Shared timeline from first call to Model Year 2028 go-live. Viaggio × Shopify — everyone aligned on what needs to happen when.</p>
+      </div>
+
+      <div class="card" style="padding: 28px 32px 32px;">
+        <p class="timeline-hint">Click a date to edit it &nbsp;·&nbsp; Click a step to mark it complete</p>
+        <ul class="timeline">
+
+          <li class="done" data-step="✓" data-original-step="1" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="0">May 20, 2026</span>
+            <h4>Initial Discovery Call</h4>
+            <p>Viaggio leadership pitch recap + first appearance of Mercedes as B2B specialist. Nathaniel confirmed RFI was shared, go-live target (Aug 2027), and willingness to make a decision this quarter.</p>
+          </li>
+
+          <li data-step="2" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="1">May 28–29, 2026</span>
+            <h4>Technical Deep Dive — Jordan Murphy + Nathaniel</h4>
+            <p>SE-level deep dive on configurator architecture, NetSuite integration pattern, lot inventory modeling, and PWA approach. Jordan (Shopify SE, B2B specialist) joining the deal.</p>
+          </li>
+
+          <li data-step="3" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="2">Set date</span>
+            <h4>RFI Section 9 Responses Delivered</h4>
+            <p>Shopify's formal written responses to all 24 vendor questions. Transaction fee confirmation, partner recs, and reference customers included.</p>
+          </li>
+
+          <li data-step="4" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="3">Set date</span>
+            <h4>Agency Partner Shortlist Shared</h4>
+            <p>2–3 Shopify Plus agencies with marine, dealer network, or RV manufacturing experience. Nathaniel's criteria: current tech standards, no IP lock-in, no AI buzzwords.</p>
+          </li>
+
+          <li data-step="5" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="4">Set date</span>
+            <h4>Agency Proposals / SOW Received</h4>
+            <p>Implementation proposals from shortlisted agencies with hours estimates for configurator, dealer portal, registration workflow, and NetSuite integration.</p>
+          </li>
+
+          <li data-step="6" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="5">Set date</span>
+            <h4>CFO / Executive Budget Sign-Off</h4>
+            <p>Nathaniel's 5-year cost analysis goes to Eric (Owner) and CFO for final budget approval. Leadership already briefed week of May 12.</p>
+          </li>
+
+          <li data-step="7" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="6">Jun 30, 2026</span>
+            <h4>Contract Signed ✍️</h4>
+            <p>Shopify Plus contract executed. Q2 target. Viaggio committed to platform — implementation planning begins immediately.</p>
+          </li>
+
+          <li data-step="8" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="7">Set date</span>
+            <h4>Agency Partner Selected + Project Kickoff</h4>
+            <p>Viaggio selects implementation partner. Discovery, architecture design, and sprint planning begin. NetSuite integration scoping with Nathaniel's team confirmed.</p>
+          </li>
+
+          <li data-step="9" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="8">Set date</span>
+            <h4>Technical Discovery Complete</h4>
+            <p>Architecture locked: Hydrogen configurator, Metaobject schema for hull records and option rules, NetSuite RESTlet integration layer, PWA service worker design.</p>
+          </li>
+
+          <li data-step="10" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="9">Set date</span>
+            <h4>Design Approved — Dealer Portal + D2C Owner Portal</h4>
+            <p>UI/UX design for dealer portal, configurator, and D2C owner experience approved by Nathaniel and Viaggio team.</p>
+          </li>
+
+          <li data-step="11" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="10">Set date</span>
+            <h4>Development Complete</h4>
+            <p>Configurator, B2B dealer portal, D2C owner portal, two-phase registration workflow, NetSuite integration, and PWA all built and internally tested.</p>
+          </li>
+
+          <li data-step="12" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="11">Set date</span>
+            <h4>Beta Dealer Program — UAT &amp; Testing</h4>
+            <p>Select group of dealers invited to test the portal, configurator, and registration workflow before full launch. Feedback incorporated before go-live.</p>
+          </li>
+
+          <li data-step="13" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="12">Set date</span>
+            <h4>Launch Readiness Review</h4>
+            <p>Jordan Murphy (Shopify SE) + Viaggio + Agency confirm all systems go. Dealer onboarding plan ready. NetSuite integration validated in production.</p>
+          </li>
+
+          <li data-step="14" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="13">Aug 1, 2027</span>
+            <h4>🎯 GO LIVE — Model Year 2028</h4>
+            <p>B2B dealer portal + D2C boat owner portal live on Shopify Plus. 137 dealers onboarded. NetSuite SuiteCommerce decommissioned.</p>
+          </li>
+
+          <li data-step="15" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="14">Set date</span>
+            <h4>Lakota / SMC / Duo Form Replication Planning</h4>
+            <p>Architecture designed for Viaggio extended to the other three brands. Same middleware, same patterns — new storefronts under the same Shopify Organization.</p>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Your Shopify Team</div>
+        <table>
+          <tr><th>Name</th><th>Role</th><th>Contact</th></tr>
+          <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, Commercial B2B</td><td>mercedes.boykin-sabalones@shopify.com</td></tr>
+          <tr><td>Jordan Murphy</td><td>Solutions Engineer, B2B Specialist</td><td>jordan.murphy@shopify.com</td></tr>
+          <tr><td>Joe Hemingway</td><td>Account Executive</td><td>joseph.hemingway@shopify.com</td></tr>
+        </table>
+        <div style="margin-top: 20px;">
+          <a href="mailto:mercedes.boykin-sabalones@shopify.com" class="btn-blue">Email Mercedes →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Resources</div>
+        <ul>
+          <li><a href="https://help.shopify.com/en/manual/b2b" target="_blank">Shopify B2B for Manufacturers →</a></li>
+          <li><a href="https://help.shopify.com/en/manual/b2b/companies" target="_blank">Company Accounts — Dealer Portal Setup →</a></li>
+          <li><a href="https://shopify.dev/docs/storefronts/headless" target="_blank">Headless Commerce with Hydrogen →</a></li>
+          <li><a href="https://shopify.dev/docs/api/admin-graphql" target="_blank">Admin GraphQL API (hull records, Metaobjects) →</a></li>
+          <li><a href="https://shopify.dev/docs/api/functions" target="_blank">Shopify Functions (configurator logic) →</a></li>
+          <li><a href="https://www.shopify.com/plus/solutions/b2b-ecommerce" target="_blank">Shopify B2B — Platform Overview →</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /content -->
+
+<div class="wrap">
   <div class="footer">
-    <span>Viaggio Pontoons × Shopify Plus</span>
-    <span>mercedes.boykin-sabalones@shopify.com</span>
+    Prepared by Shopify · Viaggio Pontoons Platform Evaluation · May 2026 · Confidential
   </div>
 </div>
+
+</div><!-- /main -->
 
 <script>
-if(sessionStorage.getItem('vp_auth')==='1'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block'}
-function unlock(){const pw=document.getElementById('pw').value.trim();if(pw==='0000'){sessionStorage.setItem('vp_auth','1');document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block'}else{document.getElementById('err').style.display='block'}}
+/* ── GATE ── */
+(function() {
+  if (sessionStorage.getItem('vp_auth') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  }
+})();
+
+function unlock() {
+  const pw = document.getElementById('pw').value.trim();
+  if (pw.toLowerCase() === 'viaggio26') {
+    sessionStorage.setItem('vp_auth', '1');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+
+/* ── TABS ── */
+function show(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── TIMELINE ── */
+function toggleStep(el) {
+  const orig = el.getAttribute('data-original-step') || el.getAttribute('data-step');
+  if (el.classList.contains('done')) {
+    el.classList.remove('done');
+    el.setAttribute('data-step', orig);
+    el.removeAttribute('data-original-step');
+  } else {
+    el.setAttribute('data-original-step', orig);
+    el.setAttribute('data-step', '✓');
+    el.classList.add('done');
+  }
+  saveProgress();
+}
+
+function editDate(e, el) {
+  e.stopPropagation();
+  if (el.contentEditable === 'true') return;
+  el.contentEditable = 'true';
+  el.classList.add('editing');
+  if (el.textContent.trim() === 'Set date') el.textContent = '';
+  el.focus();
+  const sel = window.getSelection();
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  sel.removeAllRanges();
+  sel.addRange(range);
+
+  const finish = () => {
+    el.contentEditable = 'false';
+    el.classList.remove('editing');
+    const text = el.textContent.trim();
+    if (!text) {
+      el.textContent = 'Set date';
+      el.classList.remove('has-date');
+      el.classList.add('no-date');
+    } else {
+      el.classList.add('has-date');
+      el.classList.remove('no-date');
+    }
+    saveDates();
+  };
+
+  el.addEventListener('blur', finish, { once: true });
+  el.addEventListener('keydown', function handler(ev) {
+    if (ev.key === 'Enter' || ev.key === 'Escape') {
+      ev.preventDefault();
+      el.removeEventListener('keydown', handler);
+      el.blur();
+    }
+  });
+}
+
+function saveProgress() {
+  const done = [];
+  document.querySelectorAll('.timeline li').forEach((li, i) => {
+    if (li.classList.contains('done')) done.push(i);
+  });
+  localStorage.setItem('vp-map-progress', JSON.stringify(done));
+}
+
+function saveDates() {
+  const dates = {};
+  document.querySelectorAll('.timeline .step-date').forEach(el => {
+    const idx = el.getAttribute('data-idx');
+    const text = el.textContent.trim();
+    if (text && text !== 'Set date') dates[idx] = text;
+  });
+  localStorage.setItem('vp-map-dates', JSON.stringify(dates));
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedDates = localStorage.getItem('vp-map-dates');
+  if (savedDates) {
+    const dates = JSON.parse(savedDates);
+    document.querySelectorAll('.timeline .step-date').forEach(el => {
+      const idx = el.getAttribute('data-idx');
+      if (dates[idx]) {
+        el.textContent = dates[idx];
+        el.classList.add('has-date');
+        el.classList.remove('no-date');
+      }
+    });
+  }
+
+  const savedProgress = localStorage.getItem('vp-map-progress');
+  if (savedProgress) {
+    const doneIndices = JSON.parse(savedProgress);
+    document.querySelectorAll('.timeline li').forEach((li, i) => {
+      const isDone = doneIndices.includes(i);
+      const isAlreadyDone = li.classList.contains('done');
+      if (isDone && !isAlreadyDone) {
+        const orig = li.getAttribute('data-step');
+        li.setAttribute('data-original-step', orig);
+        li.setAttribute('data-step', '✓');
+        li.classList.add('done');
+      } else if (!isDone && isAlreadyDone) {
+        const orig = li.getAttribute('data-original-step') || li.getAttribute('data-step');
+        li.classList.remove('done');
+        li.setAttribute('data-step', orig);
+        li.removeAttribute('data-original-step');
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
