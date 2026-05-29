@@ -236,7 +236,7 @@
 <!-- HEADER -->
 <div class="header">
   <div class="wrap">
-    <div class="header-eyebrow">Platform Evaluation · May 2026</div>
+    <div class="header-eyebrow">Platform Evaluation · Updated May 28, 2026</div>
     <h1>Viaggio Pontoons<br><span>× Shopify Plus</span></h1>
     <div class="header-sub">Prepared by Mercedes Boykin-Sabalones · Account Executive, Shopify Commercial B2B · For Nathaniel Talbot &amp; the Viaggio Team</div>
     <div class="header-badges">
@@ -252,9 +252,10 @@
 <div class="tab-nav">
   <div class="wrap">
     <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('recap',this)">May 28 Recap</button>
     <button class="tab-btn" onclick="show('delivers',this)">Shopify Delivers</button>
     <button class="tab-btn" onclick="show('rfi',this)">Platform Capabilities</button>
-    <button class="tab-btn" onclick="show('compare',this)">Shopify vs SuiteCommerce</button>
+    <button class="tab-btn" onclick="show('partners',this)">Partners</button>
     <button class="tab-btn" onclick="show('map',this)">Mutual Action Plan</button>
   </div>
 </div>
@@ -268,7 +269,7 @@
       <div class="section-header">
         <h2>Evaluation <span class="accent">Overview</span></h2>
         <div class="divider"></div>
-        <p>Viaggio is a multi-brand marine manufacturer evaluating Shopify Plus as the unified platform for a B2B dealer portal and D2C boat owner experience — built once, extended across four brands.</p>
+        <p>Viaggio is a multi-brand marine manufacturer evaluating Shopify Plus as the user experience layer for a B2B dealer portal and D2C boat owner experience — layered on top of NetSuite, built once, extended across four brands.</p>
       </div>
 
       <div class="stat-row">
@@ -289,7 +290,7 @@
       <div class="card">
         <div class="card-title">Who They Are</div>
         <h3>Multi-Brand Manufacturer, Bristol Indiana — 137 Dealers Across the US</h3>
-        <p>Viaggio Pontoons is the lead brand in a portfolio of four manufactured goods companies operating out of Bristol, Indiana — alongside Lakota Trailers, SMC, and Duo Form. Nathaniel Talbot, Director of IT and ERP Solutions Manager, is a team of one managing a 15-year career in enterprise IT and a vision that runs well beyond a single brand: <strong>build a platform once for Viaggio, then extend it to Lakota, SMC, and Duo Form without rebuilding middleware.</strong> Their current platform, NetSuite SuiteCommerce (~$35K/yr), was explicitly described as "never designed for B2B" by NetSuite's own engineers. Simple UI changes take 6+ months through third-party developers. The goal is a unified Shopify B2B dealer portal and D2C boat owner portal on a single platform — with a rule-based boat configurator, lot inventory management, and two-phase dealer registration — timed to the Model Year 2028 launch.</p>
+        <p>Viaggio Pontoons is the lead brand in a portfolio of four manufactured goods companies operating out of Bristol, Indiana — alongside Lakota Trailers, SMC, and Duo Form. Nathaniel Talbot, Director of IT and ERP Solutions Manager, is a team of one managing a 15-year career in enterprise IT and a vision that runs well beyond a single brand: <strong>build a platform once for Viaggio, then extend it to Lakota, SMC, and Duo Form without rebuilding middleware.</strong> NetSuite stays as the system of truth for inventory and product data — Shopify Plus layers on top as the user experience platform: central dealer dashboard, configurator host, D2C boat owner portal. The current SuiteCommerce front end was described as "never designed for B2B" by NetSuite's own engineers, and simple UI changes take 6+ months through third-party developers — but the ERP itself is staying. Target timing: Model Year 2028 launch at next year's boat show.</p>
         <div class="chips">
           <span class="chip chip-blue">B2B Dealer Portal</span>
           <span class="chip chip-blue">D2C Boat Owner Portal</span>
@@ -302,22 +303,24 @@
 
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">Why They're Moving</div>
+          <div class="card-title">Why They're Replacing the SuiteCommerce Front End</div>
           <ul>
-            <li><strong>SuiteCommerce never designed for B2B</strong> — Nathaniel heard this from NetSuite's own engineers. The current platform fights every dealer workflow.</li>
-            <li>As a team of one, <strong>simple front-end changes take 6 months</strong> via third-party devs. Maintaining the current platform is a drain on the only IT resource in the building.</li>
-            <li>No path to a headless configurator, no PWA support, no dealer lot inventory management — these requirements simply don't exist in the SuiteCommerce architecture.</li>
-            <li>The replication goal — build for Viaggio, extend to three more brands — is impossible in SuiteCommerce's tightly coupled architecture.</li>
+            <li><strong>SuiteCommerce never designed for B2B</strong> — Nathaniel heard this from NetSuite's own engineers. The current front end fights every dealer workflow.</li>
+            <li>As a team of one, <strong>simple front-end changes take 6 months</strong> via third-party devs. Maintaining the current commerce layer is a drain on the only IT resource in the building.</li>
+            <li>No path to a headless configurator, no hybrid B2B/D2C contextualization, no flexible dealer lot inventory — these requirements simply don't exist in the SuiteCommerce front end.</li>
+            <li>The replication goal — build for Viaggio, extend to three more brands — is impossible in SuiteCommerce's tightly coupled architecture. NetSuite ERP stays; the commerce layer changes.</li>
           </ul>
         </div>
         <div class="card">
           <div class="card-title">What They Need to Build</div>
           <ul>
-            <li><strong>Dealer configurator</strong> — rule-based option logic, MSRP / dealer-cost dual pricing, model-year versioning, embeddable in WordPress</li>
-            <li><strong>B2B dealer portal</strong> — 137 dealers, lot inventory as hull records, two-phase delivery registration, e-signature, NetSuite write-back</li>
+            <li><strong>Dealer configurator</strong> — rule-based option logic with hundreds of dependent options, outputs bill of materials, used by customers + dealers + sales team in one tool</li>
+            <li><strong>B2B dealer portal</strong> — 137 dealers, 1–15 users per dealer, Microsoft Entra SSO for internal staff, dealer-admin user management</li>
+            <li><strong>Warranty management</strong> — replace clunky third-party NetSuite tool with app partner (evaluating)</li>
             <li><strong>D2C owner portal</strong> — boat owner warranty registration, model-year ownership docs, recall notices</li>
-            <li><strong>Mobile PWA</strong> — installable, camera access for bill of sale + QR scan, offline registration queue</li>
-            <li><strong>NetSuite integration</strong> — bidirectional RESTlet integration, Nathaniel's team has expertise</li>
+            <li><strong>Buyback / refurb workflow</strong> — draft/inactive flag so boats don't show on site until ready; treated as separate SKUs from new versions</li>
+            <li><strong>Mobile app for sales reps</strong> — custom build on Shopify APIs</li>
+            <li><strong>NetSuite integration</strong> — Phase 1 Oracle connector, long-term Celigo/Patchworks middleware for scaling to dealer DMS</li>
           </ul>
         </div>
       </div>
@@ -342,6 +345,123 @@
           <tr><td>Joe Hemingway</td><td>Account Executive</td><td>Shopify</td></tr>
           <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, Commercial B2B</td><td>Shopify</td></tr>
           <tr><td>Jordan Murphy</td><td>Solutions Engineer, B2B Specialist</td><td>Shopify</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- MAY 28 TECHNICAL RECAP -->
+    <div id="recap" class="tab-panel">
+      <div class="section-header">
+        <h2>Technical Reconnect <span class="accent">Recap</span></h2>
+        <div class="divider"></div>
+        <p>May 28, 2026 — Nathaniel Talbot, Mercedes Boykin-Sabalones, Jordan Murphy (Shopify B2B SE), Joe Hemingway. Architecture aligned, deadline set, two open build-vs-buy questions surfaced.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-value">Jun 15<span class="unit"></span></div>
+          <div class="stat-label">Go / No-Go Deadline</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3–6<span class="unit"> mo</span></div>
+          <div class="stat-label">Incremental Rollout Window</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Boat<span class="unit"> Show</span></div>
+          <div class="stat-label">2027 Compelling Event</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Architecture — Aligned</div>
+        <h3>Shopify = UX + Dealer Portal Layer · NetSuite = System of Truth</h3>
+        <p>Viaggio is keeping NetSuite. Shopify layers on top as the user experience platform — the central dealer dashboard, the configurator host, the D2C boat owner portal. NetSuite remains the system of truth for inventory and product data. This is not a rip-and-replace. It is a UX layer on top of an ERP foundation that already works.</p>
+        <div class="callout callout-blue" style="margin-top: 14px;">
+          <p><strong>Nathaniel:</strong> "The commerce platform would be more for dealer dashboarding. Shopify would be very much the user experience platform that everything else is built upon."</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Biggest Takeaways</div>
+        <ul>
+          <li><strong>Go/no-go deadline pushed to June 15</strong> (was June 1) to give Shopify time to bring partner options to the table. Nathaniel: "No decision is worse than a bad decision."</li>
+          <li><strong>Compelling event remains the 2027 boat show.</strong> Viaggio is doing a full brand redesign around the same launch — timing is aligned for everyone. Incremental rollout over 3–6 months is fine; doesn't need to wait for boat show.</li>
+          <li><strong>Nathaniel is the sole decision-maker</strong> through partner evaluation. CFO, Head of Sales, Head of Customer Service come in for the configurator demo and beyond — not before.</li>
+          <li><strong>Hybrid Shopify site is on the table.</strong> Marketing currently on WordPress; Jordan floated moving it onto Shopify so the configurator lives natively rather than embedded. Licensing cost doesn't change. Deferred to future eval — not blocking.</li>
+          <li><strong>RFI is for framing only</strong> — no formal written response required. Jordan and Mercedes will frame partner conversations against it.</li>
+        </ul>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Open Question #1 — Configurator</div>
+          <h3>Build vs. Buy</h3>
+          <p>Hundreds of options across pontoon size, tubes, rails/LEDs, seating, electronics. Dependent rule logic between options (can't pick RGB LEDs without LEDs, can't pick heated co-captain seats without bolstered seats). Outputs a bill of materials — not exploding SKU permutations. One tool, three roles: customer builds → dealer upsells → sales team finalizes order.</p>
+          <p style="margin-top: 10px;"><strong>Nathaniel's filter:</strong> if an off-the-shelf tool needs $200K of customization to fit Viaggio's workflow, build it instead. Jordan to evaluate CPQ partners (likely overkill for budget) vs. custom on Shopify primitives (Metaobjects + Functions + Hydrogen).</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Open Question #2 — Warranty Management</div>
+          <h3>App Partner vs. Custom</h3>
+          <p>Current third-party NetSuite package is clunky — every customer of that tool ends up paying $100K+ to re-configure it. Strong candidate for an app partner swap. Needs: product registration with dealer validation, second/third owner tracking, claim management workflow.</p>
+          <p style="margin-top: 10px;"><strong>Path:</strong> Jordan and Mercedes will showcase warranty/claim management app partners during partner evaluation phase.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Integration Path — NetSuite</div>
+        <ul>
+          <li><strong>Phase 1:</strong> Oracle's Shopify connector. Has a license cost. Acknowledged: not the most robust ERP connector Jordan has seen, but handles the standard catalog + order sync out of the box for Viaggio's current pricing model.</li>
+          <li><strong>Long-term:</strong> Middleware (Celigo or Patchworks) for iPaaS. Required to scale once dealer DMS (dealer management system) integration enters scope. Nathaniel is already Celigo-certified from a prior company.</li>
+          <li><strong>Why phased:</strong> Viaggio's pricing model is simple today (MSRP-based percentages with volume tiers, no dealer-specific price lists). The Oracle connector handles that. Edge cases and future growth drive the middleware decision later.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Payments — Current & Future</div>
+        <div class="grid-2">
+          <div>
+            <h3 style="margin-bottom: 8px;">Today</h3>
+            <ul>
+              <li><strong>ACH transfers + standard invoicing</strong> — all handled in NetSuite</li>
+              <li><strong>No credit card processor</strong> configured in NetSuite</li>
+              <li><strong>Pricing:</strong> MSRP-based percentages with volume tier discounts (4 boats vs. 2 boats unlocks discount). No dealer-specific price lists today.</li>
+              <li>Big-ticket items (~$150K boats) — dealer-specific pricing risk is "drive 4 hours to save $5K"</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="margin-bottom: 8px;">Future Opportunity</h3>
+            <ul>
+              <li><strong>Aftermarket parts + accessories</strong> — credit card processing becomes relevant when D2C aftermarket enters scope</li>
+              <li><strong>Shopify Payments hook:</strong> $0.50 max fee on payment transactions vs. current ACH/invoicing flow</li>
+              <li>Doors open to processing invoice payments through Shopify when Viaggio is ready</li>
+              <li>Not blocking Phase 1 — captured for future expansion conversation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Other Confirmed Scope Items</div>
+        <ul>
+          <li><strong>Dealer portal:</strong> 1–15 users per dealer; some chain dealers have one billing location with 3–4 sales/service locations. Dealer admin manages own user list.</li>
+          <li><strong>SSO:</strong> Microsoft Azure Entra confirmed for internal employees. Dealer SSO mechanism TBD — Jordan to verify Entra + Shopify pattern works for external users.</li>
+          <li><strong>Buyback / used boat resale:</strong> Boats come back from dealer or customer → refurbish → resell as used. Need draft/inactive flag so boat doesn't show on site until ready. Returned boats treated as separate SKUs from new versions.</li>
+          <li><strong>Mobile app for sales reps:</strong> Custom build on Shopify APIs. No special requirements beyond what's in the RFI.</li>
+          <li><strong>Knowledge base:</strong> Current Dropbox-linked knowledge base is full of outdated info. Nathaniel will hand over only the current docs; everything else goes away.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Next Steps — Owner by Owner</div>
+        <table>
+          <tr><th>Owner</th><th>Action</th><th>Target</th></tr>
+          <tr><td>Mercedes</td><td>Vet partner shortlist; send profiles to Nathaniel for independent research</td><td>Mid next week (June 3–4)</td></tr>
+          <tr><td>Mercedes</td><td>Schedule 30–60 min partner intro meetings (interview format)</td><td>Following partner shortlist</td></tr>
+          <tr><td>Jordan</td><td>Verify Microsoft Entra + Shopify SSO compatibility (internal + dealer)</td><td>Before June 15</td></tr>
+          <tr><td>Mercedes + Jordan</td><td>Compile technical + partner documentation for Nathaniel's internal pitch</td><td>Rolling</td></tr>
+          <tr><td>Joe + Jordan + Mercedes</td><td>Forward partner recommendations to Nathaniel</td><td>Mid next week</td></tr>
+          <tr><td>Nathaniel</td><td>Research partners independently; email questions to the group as they arise</td><td>Rolling</td></tr>
+          <tr><td>All</td><td>Drive toward go/no-go on custom build vs. third-party</td><td>June 15, 2026</td></tr>
         </table>
       </div>
     </div>
@@ -396,8 +516,8 @@
           <div class="win-num">5</div>
           <div class="win-body">
             <div class="win-req">Section 9.3 · NetSuite Integration</div>
-            <div class="win-title">Integration Pattern Nathaniel's Team Already Knows</div>
-            <div class="win-desc">Shopify does not call NetSuite directly — and that's by design. A Vercel serverless function layer sits between Shopify webhooks (order created, registration submitted, boat shipped) and NetSuite RESTlets. NetSuite credentials live in Vercel environment variables, never visible in the browser. Nathaniel's team has RESTlet expertise — they are well-positioned to own or co-develop this layer. The pattern is familiar, the stack is standard, and no Shopify constraint prevents any of the integration flows described in the RFI.</div>
+            <div class="win-title">Phased Integration — Oracle Connector Now, Middleware Long-Term</div>
+            <div class="win-desc"><strong>Phase 1:</strong> Oracle's Shopify connector handles standard catalog + order sync. Viaggio's current pricing (MSRP percentages with volume tiers, no dealer-specific price lists) is well within the connector's out-of-the-box capability. <strong>Long-term:</strong> middleware — Celigo or Patchworks — for iPaaS once dealer DMS integration enters scope. Nathaniel is already Celigo-certified from a prior company, so the middleware path is a known quantity for him. NetSuite stays as system of truth for all inventory and product data; Shopify is the UX layer. The pattern is familiar, the stack is standard, and no Shopify constraint prevents any of the integration flows described in the RFI.</div>
           </div>
         </li>
 
@@ -421,6 +541,15 @@
 
         <li class="win-item">
           <div class="win-num">8</div>
+          <div class="win-body">
+            <div class="win-req">Payments · ACH Today, Optional Shopify Payments Future</div>
+            <div class="win-title">Keep Current ACH + Invoicing Flow. Door Open for Aftermarket Parts via Shopify Payments.</div>
+            <div class="win-desc">Today: ACH transfers + standard invoicing all flow through NetSuite. No credit card processor configured — and that's fine for Phase 1. Shopify B2B net-terms ordering bypasses payment gateways entirely, so dealer orders incur no transaction fee regardless of which payment method Viaggio uses on the back end. Future: when aftermarket parts and accessories enter scope (D2C side), Shopify Payments unlocks credit card processing with a <strong>$0.50 maximum fee on payment transactions</strong> — a strong fit given Viaggio's price points. Not blocking Phase 1; captured for the future expansion conversation.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">9</div>
           <div class="win-body">
             <div class="win-req">Nathaniel's Explicit Requirement</div>
             <div class="win-title">No IP Lock-In. Current Tech Standards. Architecture Replicates to All Four Brands.</div>
@@ -473,16 +602,16 @@
         </table>
       </div>
 
-      <div class="rfi-domain">9.3 — NetSuite Integration</div>
+      <div class="rfi-domain">9.3 — NetSuite Integration (Phased)</div>
       <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
         <table>
           <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
-          <tr><td>Existing NetSuite connector</td><td><span class="ans ans-3p">3rd party</span></td><td>Celigo / Folio3 for standard DTC flows; dealer + registration flows require custom integration</td></tr>
-          <tr><td>Outbound calls to NetSuite RESTlets from platform</td><td><span class="ans ans-custom">Custom build</span></td><td>Vercel serverless middleware — standard pattern, compatible with Nathaniel's RESTlet experience</td></tr>
-          <tr><td>Inbound webhooks from NetSuite (e.g. boat shipped → dealer lot)</td><td><span class="ans ans-custom">Custom build</span></td><td>Standard webhook receiver on Vercel; no Shopify restriction</td></tr>
-          <tr><td>NetSuite credentials never exposed client-side</td><td><span class="ans ans-native">Native</span></td><td>Architecture guarantee — Vercel env vars; browser never sees credentials</td></tr>
-          <tr><td>Shopify ↔ NetSuite sync (NetSuite as system of record)</td><td><span class="ans ans-custom">Custom build</span></td><td>Scheduled sync job (Vercel Cron) — configurable cadence</td></tr>
-          <tr><td>Orders create NetSuite sales orders with option codes</td><td><span class="ans ans-custom">Custom build</span></td><td>Order translation + RESTlet write via serverless — one-time mapping design</td></tr>
+          <tr><td>Phase 1: Existing NetSuite connector</td><td><span class="ans ans-3p">3rd party</span></td><td>Oracle's official Shopify connector — handles catalog + order sync for current pricing model</td></tr>
+          <tr><td>Long-term: Middleware / iPaaS</td><td><span class="ans ans-3p">3rd party</span></td><td>Celigo or Patchworks — required to scale to dealer DMS. Nathaniel is Celigo-certified.</td></tr>
+          <tr><td>Shopify ↔ NetSuite sync (NetSuite as system of truth)</td><td><span class="ans ans-native">Native pattern</span></td><td>Connector handles bidirectional sync — NetSuite remains source of truth for inventory, products, and pricing</td></tr>
+          <tr><td>Inbound webhooks from NetSuite (e.g. boat shipped → dealer lot)</td><td><span class="ans ans-partial">Connector / Custom</span></td><td>Oracle connector covers standard flows; edge cases configurable via middleware</td></tr>
+          <tr><td>Orders create NetSuite sales orders with option codes</td><td><span class="ans ans-3p">Connector</span></td><td>Configurator outputs BOM → connector maps line items into NetSuite sales order</td></tr>
+          <tr><td>Dealer DMS integration (future)</td><td><span class="ans ans-3p">Middleware</span></td><td>Triggers the Celigo/Patchworks move — only an iPaaS will scale here</td></tr>
         </table>
       </div>
 
@@ -497,16 +626,17 @@
         </table>
       </div>
 
-      <div class="rfi-domain">9.5 — Pricing, Plans &amp; Commercial Terms</div>
+      <div class="rfi-domain">9.5 — Pricing, Plans, Payments &amp; Commercial Terms</div>
       <div class="card rfi-table" style="padding: 0; overflow: hidden; margin-top: 0; border-radius: 0 0 10px 10px;">
         <table>
           <tr><th>Requirement</th><th>Status</th><th>Detail</th></tr>
           <tr><td>Required plan tier</td><td><span class="ans ans-native">Shopify Plus</span></td><td>B2B, Hydrogen, Functions, Admin API all included at Plus</td></tr>
-          <tr><td>Transaction fees on dealer orders</td><td><span class="ans ans-confirm">Confirm</span></td><td>Net-terms B2B orders bypass payment gateway — no fee applies. Pending account team confirmation.</td></tr>
+          <tr><td>Current payment flow (ACH + invoicing in NetSuite)</td><td><span class="ans ans-native">Compatible</span></td><td>Net-terms B2B orders bypass payment gateway — no transaction fee, no Shopify involvement in dealer ACH flow</td></tr>
+          <tr><td>Pricing model — MSRP-based % with volume tiers</td><td><span class="ans ans-native">Native</span></td><td>Shopify B2B quantity rules + volume pricing handle this. No dealer-specific price lists today; room to grow.</td></tr>
+          <tr><td>Future: Shopify Payments for aftermarket / D2C</td><td><span class="ans ans-native">Available</span></td><td><strong>$0.50 max fee per payment transaction</strong> — opens when credit card processing for aftermarket parts enters scope</td></tr>
           <tr><td>Hard limits on dealer accounts / users / SKUs</td><td><span class="ans ans-native">None</span></td><td>Shopify Plus supports thousands of B2B accounts; no limit at 137 dealers</td></tr>
           <tr><td>ToS restrictions on dealer-only ordering system</td><td><span class="ans ans-native">None</span></td><td>B2B dealer portals are a native, supported use case</td></tr>
           <tr><td>Contract term + data portability</td><td><span class="ans ans-native">Annual</span></td><td>All data exportable via Admin API — full portability, no lock-in</td></tr>
-          <tr><td>Features requiring enterprise agreement beyond Plus</td><td><span class="ans ans-confirm">Confirm</span></td><td>Standard Plus covers core requirements — confirming with account team</td></tr>
         </table>
       </div>
 
@@ -522,123 +652,71 @@
       </div>
     </div>
 
-    <!-- SHOPIFY VS SUITECOMMERCE -->
-    <div id="compare" class="tab-panel">
+    <!-- PARTNERS -->
+    <div id="partners" class="tab-panel">
       <div class="section-header">
-        <h2>Shopify Plus vs <span class="accent">NetSuite SuiteCommerce</span></h2>
+        <h2>Implementation <span class="accent">Partners</span></h2>
         <div class="divider"></div>
-        <p>A direct comparison across the capabilities that matter most for Viaggio's B2B dealer portal and configurator requirements.</p>
+        <p>Vetted Shopify Plus agency shortlist for Viaggio — currently in evaluation. Partner profiles arriving by mid next week.</p>
       </div>
 
-      <div class="callout callout-blue" style="margin-bottom: 20px;">
-        <p><strong>Context:</strong> Nathaniel confirmed that NetSuite engineers told him SuiteCommerce was "never designed for B2B." Simple UI changes currently take 6+ months through third-party developers at ~$35K/yr in platform licensing. This comparison reflects Viaggio's real experience, not a theoretical evaluation.</p>
+      <div class="callout callout-amber" style="margin-bottom: 18px;">
+        <p><strong>Status:</strong> Partner shortlist is being compiled. Mercedes and Jordan will deliver vetted partner profiles for Nathaniel's independent research by <strong>June 3–4, 2026</strong>. Partner intro meetings (30–60 min, interview format) follow that. Final partner selection feeds the June 15 go/no-go decision.</p>
       </div>
 
-      <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="card">
+        <div class="card-title">Nathaniel's Partner Filter Criteria</div>
+        <h3>What Will Get a Partner Eliminated Fast</h3>
+        <div class="callout callout-blue" style="margin-top: 0;">
+          <p><strong>"Current tech standards. No IP lock-in. No AI buzzwords."</strong> — Nathaniel Talbot, Director of IT</p>
+        </div>
+        <ul style="margin-top: 14px;">
+          <li><strong>Current tech standards</strong> — modern stack, not legacy</li>
+          <li><strong>No IP lock-in</strong> — Viaggio must own what's built; portable code, no proprietary frameworks</li>
+          <li><strong>No AI buzzwords</strong> — Nathaniel will walk if a partner pitches AI features as the lead value prop</li>
+          <li><strong>No $200K customization buyouts</strong> — if a tool needs that much to bend to Viaggio's workflow, build it instead</li>
+          <li><strong>Budget transparency</strong> — Nathaniel wants real hourly rates, not vague estimates. He has consulting-background benchmarks.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">What a Partner Needs to Be Able to Do</div>
         <table>
-          <tr>
-            <th style="width: 40%;">Capability</th>
-            <th class="compare-header-shopify" style="width: 30%;">Shopify Plus</th>
-            <th class="compare-header-nc" style="width: 30%;">NetSuite SuiteCommerce</th>
-          </tr>
-          <tr>
-            <td>Designed for B2B dealer commerce</td>
-            <td class="yes">✓ Purpose-built</td>
-            <td class="no">✗ "Never designed for B2B" — NetSuite engineers</td>
-          </tr>
-          <tr>
-            <td>Admin UI changes without developers</td>
-            <td class="yes">✓ Shopify admin — instant</td>
-            <td class="no">✗ 6+ months via third-party devs</td>
-          </tr>
-          <tr>
-            <td>Native B2B company accounts + price lists</td>
-            <td class="yes">✓ Included with Plus</td>
-            <td class="partial">⚠️ Requires SuiteCommerce customization</td>
-          </tr>
-          <tr>
-            <td>Headless / composable front-end architecture</td>
-            <td class="yes">✓ Hydrogen — standard React/Next.js stack</td>
-            <td class="no">✗ Tightly coupled to NetSuite infrastructure</td>
-          </tr>
-          <tr>
-            <td>Configurator embeds in WordPress</td>
-            <td class="yes">✓ Headless = embeds anywhere</td>
-            <td class="no">✗ Not architecturally feasible</td>
-          </tr>
-          <tr>
-            <td>PWA support (installable, camera, offline)</td>
-            <td class="yes">✓ Hydrogen + Vercel — full PWA</td>
-            <td class="no">✗ No PWA support</td>
-          </tr>
-          <tr>
-            <td>Net terms B2B ordering (no transaction fee)</td>
-            <td class="yes">✓ Native — net terms bypass gateway</td>
-            <td class="partial">⚠️ Available via configuration</td>
-          </tr>
-          <tr>
-            <td>Metaobjects for hull inventory and rule storage</td>
-            <td class="yes">✓ Native — flexible structured data</td>
-            <td class="no">✗ No equivalent flexible data layer</td>
-          </tr>
-          <tr>
-            <td>NetSuite integration</td>
-            <td class="yes">✓ Vercel serverless + RESTlets (Nathaniel's team can own this)</td>
-            <td class="yes">✓ Native (same system)</td>
-          </tr>
-          <tr>
-            <td>Architecture replicates to Lakota, SMC, Duo Form</td>
-            <td class="yes">✓ One Shopify Org, expansion stores per brand</td>
-            <td class="no">✗ Each brand requires separate SuiteCommerce instance</td>
-          </tr>
-          <tr>
-            <td>No IP lock-in (data portability)</td>
-            <td class="yes">✓ Full API export; no proprietary lock</td>
-            <td class="no">✗ Data locked in NetSuite schemas</td>
-          </tr>
-          <tr>
-            <td>Global partner ecosystem for complex builds</td>
-            <td class="yes">✓ Largest certified partner network in the world</td>
-            <td class="no">✗ Very limited SuiteCommerce specialists</td>
-          </tr>
-          <tr>
-            <td>Platform investment velocity</td>
-            <td class="yes">✓ Quarterly B2B feature releases (Shopify Editions)</td>
-            <td class="no">✗ Commerce secondary to ERP roadmap</td>
-          </tr>
-          <tr>
-            <td>Annual platform cost</td>
-            <td class="yes">✓ Shopify Plus — scalable pricing</td>
-            <td class="no">✗ ~$35K/yr with constrained capabilities</td>
-          </tr>
-          <tr>
-            <td>Uptime SLA</td>
-            <td class="yes">✓ 99.99% — shopifystatus.com</td>
-            <td class="partial">⚠️ Hosted on NetSuite infrastructure</td>
-          </tr>
+          <tr><th>Capability</th><th>Why It Matters</th></tr>
+          <tr><td>Headless Shopify storefront</td><td>Hydrogen or custom front-end builds — dealer portal is headless</td></tr>
+          <tr><td>Configurator build</td><td>Custom on Shopify primitives (Metaobjects + Functions) OR integration of a CPQ/configurator app partner</td></tr>
+          <tr><td>NetSuite integration</td><td>Experience with Oracle's Shopify connector AND middleware (Celigo, Patchworks). Phase 1 = connector. Long-term = middleware.</td></tr>
+          <tr><td>Warranty app integration</td><td>Experience evaluating and integrating warranty/claim management app partners on Shopify</td></tr>
+          <tr><td>Microsoft Entra SSO</td><td>Internal SSO implementation + a working pattern for dealer SSO</td></tr>
+          <tr><td>Mobile app development</td><td>Custom sales-rep app on Shopify APIs</td></tr>
+          <tr><td>B2B + D2C hybrid storefront</td><td>Single Shopify site contextualized by guest / dealer / D2C customer</td></tr>
+          <tr><td>Buyback / lifecycle workflow</td><td>Draft/active SKU state management spanning Shopify + NetSuite</td></tr>
         </table>
       </div>
 
-      <div class="grid-2" style="margin-top: 18px;">
-        <div class="card">
-          <div class="card-title">Where Shopify Wins Outright</div>
-          <ul>
-            <li><strong>Architecture flexibility</strong> — headless, composable, embeddable. SuiteCommerce is a monolith.</li>
-            <li><strong>Developer ecosystem</strong> — hiring for React/Next.js is a global talent pool. Hiring for SuiteCommerce is a niche market.</li>
-            <li><strong>Multi-brand replication</strong> — Shopify Organization was designed for exactly what Nathaniel described. SuiteCommerce was not.</li>
-            <li><strong>Speed of change</strong> — Nathaniel can update Shopify admin settings in minutes. SuiteCommerce changes require third-party engagement.</li>
-          </ul>
+      <div class="card">
+        <div class="card-title">Evaluation Format</div>
+        <ol>
+          <li><strong>Step 1 — Partner profiles shared</strong> (target: June 3–4). Mercedes sends vetted partner websites/profiles. Nathaniel does his own research first.</li>
+          <li><strong>Step 2 — 30–60 min interview-style intro per partner.</strong> Nathaniel runs point alone. CFO / Head of Sales / Head of Customer Service are not pulled in yet.</li>
+          <li><strong>Step 3 — Shortlist narrowed.</strong> Configurator-depth demos with the finalists. At this stage Nathaniel pulls in his internal stakeholders.</li>
+          <li><strong>Step 4 — Scoping conversation</strong> between Shopify, Viaggio, and the selected partner to define SOW.</li>
+          <li><strong>Step 5 — Final selection</strong> feeds the June 15 go/no-go decision on custom build vs. third-party.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Partner Shortlist</div>
+        <div class="callout callout-dark" style="margin-top: 0;">
+          <p><strong>TBD — Updated when Mercedes finalizes recommendations.</strong> Target delivery: June 3–4, 2026. Profiles will be added here with: agency name, marine/dealer/RV experience, Shopify Plus certification status, NetSuite integration depth, configurator portfolio, and Nathaniel-relevant filter alignment.</p>
         </div>
-        <div class="card">
-          <div class="card-title">Where NetSuite Has an Edge</div>
-          <ul>
-            <li><strong>Native ERP connection</strong> — same vendor, same system. No middleware required for basic catalog and order sync. Shopify closes this gap with the Vercel integration layer, but it is a build.</li>
-            <li><strong>Existing relationship</strong> — Viaggio is already on NetSuite for ERP. The SuiteCommerce path would be a lighter integration. Shopify's path is more powerful but requires more integration design work upfront.</li>
-          </ul>
-          <div class="callout callout-dark" style="margin-top: 14px;">
-            <p>Nathaniel's own 5-year cost analysis concluded that Shopify is the right platform. This comparison reinforces why.</p>
-          </div>
-        </div>
+        <table style="margin-top: 14px;">
+          <tr><th>Partner</th><th>Specialization</th><th>Status</th></tr>
+          <tr><td>TBD</td><td>—</td><td><span class="ans ans-confirm">Pending</span></td></tr>
+          <tr><td>TBD</td><td>—</td><td><span class="ans ans-confirm">Pending</span></td></tr>
+          <tr><td>TBD</td><td>—</td><td><span class="ans ans-confirm">Pending</span></td></tr>
+        </table>
+        <p style="margin-top: 14px; font-size: 14px; color: var(--muted);"><em>Nathaniel — if there's a partner you've worked with previously that you'd like included in the evaluation, let Mercedes know. Trusted prior relationships are welcome alongside the Shopify-recommended shortlist.</em></p>
       </div>
     </div>
 
@@ -660,34 +738,34 @@
             <p>Viaggio leadership pitch recap + first appearance of Mercedes as B2B specialist. Nathaniel confirmed RFI was shared, go-live target (Aug 2027), and willingness to make a decision this quarter.</p>
           </li>
 
-          <li data-step="2" onclick="toggleStep(this)">
-            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="1">May 28–29, 2026</span>
-            <h4>Technical Deep Dive — Jordan Murphy + Nathaniel</h4>
-            <p>SE-level deep dive on configurator architecture, NetSuite integration pattern, lot inventory modeling, and PWA approach. Jordan (Shopify SE, B2B specialist) joining the deal.</p>
+          <li class="done" data-step="✓" data-original-step="2" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="1">May 28, 2026</span>
+            <h4>Technical Reconnect — Jordan Murphy + Nathaniel</h4>
+            <p>Architecture aligned: Shopify = UX layer, NetSuite = system of truth. Two open build-vs-buy questions (configurator + warranty). Go/no-go pushed from June 1 to June 15.</p>
           </li>
 
           <li data-step="3" onclick="toggleStep(this)">
-            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="2">Set date</span>
-            <h4>RFI Section 9 Responses Delivered</h4>
-            <p>Shopify's formal written responses to all 24 vendor questions. Transaction fee confirmation, partner recs, and reference customers included.</p>
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="2">Jun 3–4, 2026</span>
+            <h4>Partner Shortlist Delivered to Nathaniel</h4>
+            <p>Mercedes + Jordan deliver vetted Shopify Plus partner profiles to Nathaniel for independent research. Filter: current tech standards, no IP lock-in, no AI buzzwords.</p>
           </li>
 
           <li data-step="4" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="3">Set date</span>
-            <h4>Agency Partner Shortlist Shared</h4>
-            <p>2–3 Shopify Plus agencies with marine, dealer network, or RV manufacturing experience. Nathaniel's criteria: current tech standards, no IP lock-in, no AI buzzwords.</p>
+            <h4>Partner Intro Meetings (30–60 min each)</h4>
+            <p>Interview-style intro per partner. Nathaniel runs point alone — CFO / Sales / CS join later for configurator demos.</p>
           </li>
 
           <li data-step="5" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="4">Set date</span>
-            <h4>Agency Proposals / SOW Received</h4>
-            <p>Implementation proposals from shortlisted agencies with hours estimates for configurator, dealer portal, registration workflow, and NetSuite integration.</p>
+            <h4>SSO Compatibility Confirmed (Microsoft Entra)</h4>
+            <p>Jordan verifies Microsoft Azure Entra + Shopify SSO pattern for internal employees and dealer access. Removes a known unknown before partner SOW.</p>
           </li>
 
           <li data-step="6" onclick="toggleStep(this)">
-            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="5">Set date</span>
-            <h4>CFO / Executive Budget Sign-Off</h4>
-            <p>Nathaniel's 5-year cost analysis goes to Eric (Owner) and CFO for final budget approval. Leadership already briefed week of May 12.</p>
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="5">Jun 15, 2026</span>
+            <h4>🎯 Go / No-Go Decision — Custom Build vs. Third-Party</h4>
+            <p>Nathaniel's deadline. Configurator: build custom on Shopify primitives or integrate an app partner. Warranty: same call. Partner selection feeds this decision.</p>
           </li>
 
           <li data-step="7" onclick="toggleStep(this)">
@@ -734,8 +812,8 @@
 
           <li data-step="14" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="13">Aug 1, 2027</span>
-            <h4>🎯 GO LIVE — Model Year 2028</h4>
-            <p>B2B dealer portal + D2C boat owner portal live on Shopify Plus. 137 dealers onboarded. NetSuite SuiteCommerce decommissioned.</p>
+            <h4>🎯 GO LIVE — Model Year 2028 Boat Show</h4>
+            <p>B2B dealer portal + D2C boat owner portal live on Shopify Plus, layered on NetSuite. 137 dealers onboarded. SuiteCommerce front end retired — NetSuite ERP continues as system of truth.</p>
           </li>
 
           <li data-step="15" onclick="toggleStep(this)">
