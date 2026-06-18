@@ -3,64 +3,613 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Caravela Coffee × Shopify Plus</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Caravela Coffee × Shopify Plus — Mutual Action Plan</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0f0f0f;--surface:#161616;--border:#222;--text:#f0f0f0;--muted:#888;--accent:#e91e8c;--accent-light:rgba(233,30,140,.12)}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center}
-.gate{width:100%;max-width:400px;padding:2.5rem;text-align:center}
-.gate-logo{font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
-.gate-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--text);margin-bottom:.5rem}
-.gate-sub{font-size:.8rem;color:var(--muted);margin-bottom:2rem}
-.gate input{width:100%;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:1rem;letter-spacing:4px;text-align:center;outline:none;margin-bottom:.75rem}
-.gate input:focus{border-color:var(--accent)}
-.gate button{width:100%;padding:.75rem;background:var(--accent);color:#fff;border:none;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600}
-.gate button:hover{opacity:.9}
-.gate-err{font-size:.75rem;color:#e05;margin-top:.5rem;display:none}
-.content{display:none;max-width:860px;margin:0 auto;padding:3rem 2rem}
-.badge{font-size:.55rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-h1{font-family:'Playfair Display',serif;font-size:2.4rem;line-height:1.2;margin-bottom:.75rem}
-h1 em{color:var(--accent);font-style:italic}
-.rule{width:48px;height:2px;background:var(--accent);margin:1.5rem 0}
-.desc{font-size:.95rem;color:var(--muted);line-height:1.7;max-width:520px}
-.placeholder{margin-top:3rem;padding:2rem;border:1px solid var(--border);background:var(--surface)}
-.placeholder-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
-.placeholder-text{font-size:.85rem;color:#555;font-style:italic}
-.footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted);display:flex;justify-content:space-between}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #C0853D;
+    --accent-dark: #9A6A2E;
+    --accent-light: #FBF1E2;
+    --espresso: #2B1B12;
+    --dark: #3D2A1E;
+    --border: #e7e0d6;
+    --text: #221913;
+    --muted: #6a5c4f;
+    --bg: #FAF7F2;
+    --white: #ffffff;
+    --max: 920px;
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* ── GATE ── */
+  #gate { position: fixed; inset: 0; z-index: 9999; background: #1A0F09; display: flex; align-items: center; justify-content: center; }
+  .gate-box { width: 100%; max-width: 380px; padding: 2.5rem; text-align: center; }
+  .gate-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .gate-title { font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .gate-sub { font-size: 13px; color: #8a7a6a; margin-bottom: 28px; }
+  .gate-box input { width: 100%; padding: 12px 16px; background: #2A1B11; border: 1px solid #43301F; color: #fff; font-size: 14px; text-align: center; letter-spacing: 4px; outline: none; border-radius: 6px; margin-bottom: 10px; transition: border-color 0.15s; }
+  .gate-box input:focus { border-color: var(--accent); }
+  .gate-box input::placeholder { letter-spacing: 2px; color: #5a4a3a; }
+  .gate-btn { width: 100%; padding: 13px; background: var(--accent); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.15s; }
+  .gate-btn:hover { background: var(--accent-dark); }
+  .gate-err { font-size: 12px; color: #e0664a; margin-top: 8px; display: none; }
+
+  /* ── MAIN ── */
+  #main { display: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ── HEADER ── */
+  .header { background: var(--espresso); border-bottom: 4px solid var(--accent); position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: 0; right: 0; width: 400px; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(192,133,61,0.10)); pointer-events: none; }
+  .header .wrap { padding-top: 60px; padding-bottom: 48px; text-align: center; }
+  .header-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .header h1 { font-size: 58px; font-weight: 800; color: var(--white); letter-spacing: -2px; line-height: 1.05; }
+  .header h1 span { color: var(--accent); }
+  .header-sub { color: #b39c84; font-size: 13.5px; margin-top: 12px; }
+  .header-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+  .badge-accent { background: var(--accent); color: #fff; }
+  .badge-outline { border: 1.5px solid #5a4634; color: #b39c84; }
+
+  /* ── TABS ── */
+  .tab-nav { background: var(--dark); border-bottom: 1px solid #50392a; position: sticky; top: 0; z-index: 100; }
+  .tab-nav .wrap { display: flex; gap: 2px; justify-content: center; overflow-x: auto; padding-top: 0; padding-bottom: 0; }
+  .tab-nav .wrap::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 16px 20px; border: none; background: none; cursor: pointer; font-size: 13.5px; font-weight: 600; color: #b39c84; border-bottom: 3px solid transparent; white-space: nowrap; letter-spacing: 0.2px; transition: color 0.15s; flex-shrink: 0; }
+  .tab-btn:hover { color: #e8d8c4; }
+  .tab-btn.active { color: var(--white); border-bottom-color: var(--accent); }
+
+  /* ── CONTENT ── */
+  .content { padding: 40px 0 80px; }
+  .content .wrap { padding-top: 0; padding-bottom: 0; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-header { margin-bottom: 28px; }
+  .section-header h2 { font-size: 32px; font-weight: 800; color: var(--espresso); letter-spacing: -0.5px; line-height: 1.15; }
+  .section-header h2 .accent { color: var(--accent); }
+  .section-header p { font-size: 15px; color: var(--muted); margin-top: 8px; max-width: 640px; }
+  .divider { width: 48px; height: 4px; background: var(--accent); border-radius: 2px; margin: 12px 0 16px; }
+
+  /* ── CARDS ── */
+  .card { background: var(--white); border-radius: 12px; padding: 28px 32px; margin-bottom: 18px; border: 1px solid var(--border); }
+  .card-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .card h3 { font-size: 18px; font-weight: 700; color: var(--espresso); margin-bottom: 12px; }
+  .card p { font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  ul, ol { padding-left: 20px; }
+  li { font-size: 14.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.6; }
+  li strong { color: var(--text); }
+
+  /* ── CALLOUTS ── */
+  .callout { padding: 16px 20px; border-radius: 0 10px 10px 0; margin: 16px 0; }
+  .callout-accent { background: var(--accent-light); border-left: 4px solid var(--accent); }
+  .callout-accent p { color: #6b4413; font-size: 14px; }
+  .callout-dark { background: #f6f2ec; border-left: 4px solid var(--espresso); }
+  .callout-dark p { color: var(--muted); font-size: 14px; }
+
+  /* ── STAT ROW ── */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 18px; }
+  .stat { background: var(--white); padding: 24px 28px; }
+  .stat-value { font-size: 32px; font-weight: 800; color: var(--espresso); letter-spacing: -1px; line-height: 1; }
+  .stat-value .unit { font-size: 18px; color: var(--accent); }
+  .stat-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 6px; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: var(--espresso); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 700; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; }
+  td { padding: 11px 16px; border-bottom: 1px solid #f1ece4; color: var(--muted); vertical-align: top; }
+  td:first-child { font-weight: 600; color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fbf8f3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .chip { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .chip-accent { background: var(--accent-light); color: var(--accent-dark); }
+  .chip-dark { background: #efe9e1; color: #5a4a3a; }
+
+  /* ── TIMELINE ── */
+  .timeline { list-style: none; padding: 0; }
+  .timeline li { padding: 18px 0 18px 52px; position: relative; border-left: 2px solid var(--border); margin-left: 16px; cursor: pointer; user-select: none; transition: background 0.1s; }
+  .timeline li:hover { background: rgba(192,133,61,0.04); }
+  .timeline li:last-child { border-left-color: transparent; }
+  .timeline li::before { content: attr(data-step); position: absolute; left: -18px; top: 18px; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; transition: background 0.15s, transform 0.1s; }
+  .timeline li:hover::before { transform: scale(1.1); }
+  .timeline li.done::before { background: #22a06b; }
+  .timeline li.done h4 { color: var(--muted); }
+  .timeline li h4 { font-size: 15px; font-weight: 700; color: var(--espresso); margin-bottom: 4px; }
+  .timeline li p { font-size: 13.5px; color: var(--muted); }
+  .timeline-hint { font-size: 12px; color: #b3a795; margin-bottom: 14px; }
+  .owner-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 9px; border-radius: 4px; margin-left: 8px; vertical-align: middle; background: #efe9e1; color: #6a5c4f; }
+  .owner-shopify { background: var(--accent-light); color: var(--accent-dark); }
+  .owner-caravela { background: #e7efe9; color: #1f5c3f; }
+  .owner-joint { background: #ece6f5; color: #5b3d8a; }
+
+  /* ── DATE CHIPS ── */
+  .step-date { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 12px; border-radius: 20px; margin-bottom: 8px; cursor: pointer; border: 1.5px dashed transparent; transition: border-color 0.12s, background 0.12s; min-width: 60px; line-height: 1.6; }
+  .step-date.has-date { color: var(--accent-dark); background: var(--accent-light); }
+  .step-date.no-date { color: #bbb; background: #f3efe9; }
+  .step-date:hover { border-color: var(--accent); }
+  .step-date.editing { border-style: solid; border-color: var(--accent); background: white; color: var(--text); outline: none; cursor: text; }
+
+  .btn-accent { display: inline-block; background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; margin-top: 8px; }
+  .btn-accent:hover { background: var(--accent-dark); text-decoration: none; }
+
+  a { color: var(--accent-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .footer { text-align: center; color: #b3a795; font-size: 12px; padding: 24px 0 40px; border-top: 1px solid var(--border); margin-top: 20px; }
+
+  @media (max-width: 720px) {
+    .header h1 { font-size: 36px; }
+    .content { padding: 28px 0 60px; }
+    .grid-2, .stat-row { grid-template-columns: 1fr; }
+    .card { padding: 20px; }
+    .section-header h2 { font-size: 24px; }
+  }
 </style>
 </head>
 <body>
 
-<div id="gate" class="gate">
-  <div class="gate-logo">Shopify Plus · Confidential</div>
-  <div class="gate-title">Caravela Coffee</div>
-  <div class="gate-sub">Enter passcode to view</div>
-  <input type="password" id="pw" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter')unlock()">
-  <button onclick="unlock()">View Proposal</button>
-  <div class="gate-err" id="err">Incorrect passcode</div>
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-eyebrow">Shopify Plus · Confidential</div>
+    <div class="gate-title">Caravela Coffee</div>
+    <div class="gate-sub">Mutual Action Plan — enter passcode to view</div>
+    <input type="password" id="pw" placeholder="••••••" maxlength="24"
+      onkeydown="if(event.key==='Enter')unlock()">
+    <button class="gate-btn" onclick="unlock()">View Plan</button>
+    <div class="gate-err" id="err">Incorrect passcode — check with your Shopify contact.</div>
+  </div>
 </div>
 
-<div id="content" class="content">
-  <div class="badge">Shopify Plus · Proposal</div>
-  <h1>Caravela Coffee<br>× <em>Shopify Plus</em></h1>
-  <div class="rule"></div>
-  <p class="desc">Prepared for Nicole Freydell and the Caravela Coffee team by Mercedes Boykin-Sabalones, Sr. Account Executive at Shopify.</p>
+<!-- MAIN -->
+<div id="main">
 
-  <div class="placeholder">
-    <div class="placeholder-label">Proposal Content</div>
-    <div class="placeholder-text">B2B wholesale portal overview, multi-currency, and platform comparison coming soon.</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="wrap">
+    <div class="header-eyebrow">Mutual Action Plan · Updated June 18, 2026</div>
+    <h1>Caravela Coffee<br><span>× Shopify Plus</span></h1>
+    <div class="header-sub">Prepared by Mercedes Boykin-Sabalones · Account Executive, Shopify Commercial B2B · For Nicole Freydell, Luz Gomez &amp; the Caravela team</div>
+    <div class="header-badges">
+      <span class="badge badge-accent">Phase 1 · B2B Spot Coffee Portal</span>
+      <span class="badge badge-outline">🎯 Target Go-Live: October 2026</span>
+      <span class="badge badge-outline">NetSuite + Shopify B2B</span>
+      <span class="badge badge-outline">Confidential</span>
+    </div>
   </div>
+</div>
 
+<!-- TABS -->
+<div class="tab-nav">
+  <div class="wrap">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('recap',this)">Jun 18 Demo Recap</button>
+    <button class="tab-btn" onclick="show('map',this)">Mutual Action Plan</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="wrap">
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-panel active">
+      <div class="section-header">
+        <h2>Project <span class="accent">Overview</span></h2>
+        <div class="divider"></div>
+        <p>Caravela is replacing its custom NetSuite-backed "Roaster Hub" with a self-service Shopify B2B portal. NetSuite stays the system of truth; Shopify becomes the customer-facing layer. Phase 1 is the spot coffee business with a sample-first flow — architected once, launched iteratively, targeting October 2026.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-value">~$5<span class="unit">M</span></div>
+          <div class="stat-label">B2B Green Coffee GMV</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">300<span class="unit">+</span></div>
+          <div class="stat-label">Active Accounts Globally</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Oct<span class="unit"> '26</span></div>
+          <div class="stat-label">Target Go-Live</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Who They Are</div>
+        <h3>Green Coffee Trader — ~90% B2B, 7 Origins, 4 Continents</h3>
+        <p>Caravela is a ~25-year-old green coffee trader sourcing from seven Latin American origins (Colombia largest) with offices across Houston, Dublin, London, and Australia. The business is ~90% B2B / 10% emerging DTC, managing roughly $5M in green coffee across 300+ accounts. The goal: move from manual, email-driven trading to a self-service platform that can serve thousands of North American micro-roasters.</p>
+        <div class="chips">
+          <span class="chip chip-accent">B2B Spot Portal</span>
+          <span class="chip chip-accent">Sample-First Flow</span>
+          <span class="chip chip-dark">NetSuite (System of Truth)</span>
+          <span class="chip chip-dark">Atlas (Product/Tasting Data)</span>
+          <span class="chip chip-dark">Multi-Currency</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Target Architecture</div>
+          <ul>
+            <li><strong>NetSuite remains the system of truth</strong> for inventory, pricing, and invoicing.</li>
+            <li><strong>Shopify owns</strong> the customer-facing storefront, payments, the gated experience, and order releases.</li>
+            <li><strong>Customer approval workflow:</strong> register in Shopify (lands "not approved") → syncs to NetSuite for review → NetSuite grants access back.</li>
+            <li><strong>Contracting workflow:</strong> customer approves samples in the portal → triggers NetSuite to formalize the contract → NetSuite syncs a contracted price list back to Shopify.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Phase 1 Scope</div>
+          <ul>
+            <li><strong>Spot coffee only</strong> (~15% of inventory). Forward contracting (~85%) is Phase 2 — but architect once.</li>
+            <li><strong>Sample-first path</strong> is primary; full-product ordering follows.</li>
+            <li><strong>Samples:</strong> charging model + messaging to discourage over-ordering (no hard limits).</li>
+            <li><strong>Personalized B2B catalogs</strong> by location/role; templated PDPs via metafields (harvest date, altitude, tasting notes).</li>
+            <li><strong>Payment terms per account</strong> (CC / ACH / due-on-fulfillment); warehouse-release fulfillment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Open Items to Resolve Before Build</div>
+        <ul>
+          <li><strong>Atlas integration path</strong> — connect product/tasting-note data via NetSuite or directly to Shopify (Caravela investigating).</li>
+          <li><strong>Full-order invoicing</strong> — Shopify-native invoices vs. linked NetSuite PDFs.</li>
+          <li><strong>Implementation partner</strong> — build internally vs. with a Shopify-experienced B2B + NetSuite partner (introductions underway).</li>
+          <li><strong>Leadership sign-off</strong> — Caravela presenting the demo and direction to company leadership.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Project Team</div>
+        <table>
+          <tr><th>Name</th><th>Role</th><th>Company</th></tr>
+          <tr><td>Nicole Freydell Restrepo</td><td>Brand Business Leader / Ecom Mgr (Champion)</td><td>Caravela Coffee</td></tr>
+          <tr><td>Luz Gomez</td><td>IT Director (NetSuite owner)</td><td>Caravela Coffee</td></tr>
+          <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, Commercial B2B</td><td>Shopify</td></tr>
+          <tr><td>Jordan Murphy</td><td>Solutions Engineer, B2B Specialist</td><td>Shopify</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- JUN 18 DEMO RECAP -->
+    <div id="recap" class="tab-panel">
+      <div class="section-header">
+        <h2>B2B Capabilities Demo <span class="accent">Recap</span></h2>
+        <div class="divider"></div>
+        <p>June 18, 2026 — Mercedes Boykin-Sabalones &amp; Jordan Murphy (Shopify), Nicole Freydell &amp; Luz Gomez (Caravela). The proposed architecture meets ~90% of requirements; timeline is "as soon as possible."</p>
+      </div>
+
+      <div class="callout callout-accent">
+        <p><strong>Headline:</strong> Caravela confirmed the proposal meets roughly 90% of their requirements and wants to move as soon as possible. Next: bring in an implementation partner, build this mutual action plan, and present to leadership.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Decisions Aligned</div>
+        <ul>
+          <li><strong>Sample quantity strategy:</strong> charging model + user messaging to discourage excessive ordering — not hard limits.</li>
+          <li><strong>Sample vs. purchase separation:</strong> sample ordering and full-product contracting are separate platform modules for a simpler UX.</li>
+          <li><strong>System of record:</strong> NetSuite remains the source of truth for inventory, pricing, and invoicing; Shopify owns the customer interface and payment processing.</li>
+          <li><strong>Launch approach:</strong> iterative — ship an initial release, then improve.</li>
+        </ul>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">What We Demonstrated</div>
+          <ul>
+            <li>Unified global admin — multi-geo, multi-currency, multi-language in one backend.</li>
+            <li>Unauthenticated experience + configurable account registration landing as "not approved" until NetSuite syncs approval.</li>
+            <li>Personalized B2B catalogs by location and role.</li>
+            <li>Configurable payment terms, warehouse-release fulfillment, one-off shipping addresses per cafe.</li>
+            <li>Shopify Flow automation, metafield-driven PDPs, Sidekick AI, and agentic-commerce visibility controls.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Open Questions Surfaced</div>
+          <ul>
+            <li><strong>Atlas integration path</strong> — via NetSuite or direct to Shopify (Caravela investigating).</li>
+            <li><strong>Full-order invoicing</strong> — Shopify-native vs. linked NetSuite PDFs.</li>
+            <li><strong>Build vs. partner</strong> — internal team vs. Shopify-recommended partner.</li>
+            <li><strong>Commercial / paper process</strong> — not yet started; pending leadership sign-off.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Immediate Next Steps from the Call</div>
+        <table>
+          <tr><th>Owner</th><th>Action</th></tr>
+          <tr><td>Mercedes</td><td>Introduce an implementation partner experienced in Shopify B2B + NetSuite</td></tr>
+          <tr><td>Mercedes</td><td>Build this mutual action plan with a realistic launch timeline</td></tr>
+          <tr><td>Caravela</td><td>Share the demo and summary with company leadership for feedback</td></tr>
+          <tr><td>Caravela</td><td>Investigate Atlas ↔ NetSuite ↔ Shopify data integration</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- MUTUAL ACTION PLAN -->
+    <div id="map" class="tab-panel">
+      <div class="section-header">
+        <h2>Mutual <span class="accent">Action Plan</span></h2>
+        <div class="divider"></div>
+        <p>Shared timeline from discovery through an October 2026 go-live. Caravela × Shopify — aligned milestones, owners, and dates. The build window is intentionally lean and iterative, in line with Caravela's "as soon as possible" goal.</p>
+      </div>
+
+      <div class="card" style="padding: 28px 32px 32px;">
+        <p class="timeline-hint">Click a date to edit it &nbsp;·&nbsp; Click a step to mark it complete</p>
+        <ul class="timeline">
+
+          <li class="done" data-step="✓" data-original-step="1" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="0">Apr 29, 2026</span>
+            <h4>Intro &amp; Discovery Call <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>First conversation. Confirmed ~90% B2B, ~$5M green coffee, 300+ accounts, and the goal of a self-service spot portal for micro-roasters.</p>
+          </li>
+
+          <li class="done" data-step="✓" data-original-step="2" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="1">Jun 2, 2026</span>
+            <h4>Technical Discovery — NetSuite Architecture <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>Aligned that NetSuite stays the system of truth and Shopify is the customer layer. Customer approval workflow, sample-first model, and payment timing defined.</p>
+          </li>
+
+          <li class="done" data-step="✓" data-original-step="3" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="2">Jun 18, 2026</span>
+            <h4>B2B Capabilities Demo <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>Live B2B + NetSuite capabilities demo. Proposal meets ~90% of requirements; Caravela wants to move ASAP. Decisions locked on samples, module separation, and iterative launch.</p>
+          </li>
+
+          <li data-step="4" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="3">Jun 23–27, 2026</span>
+            <h4>Implementation Partner Introductions <span class="owner-tag owner-shopify">Shopify</span></h4>
+            <p>Mercedes introduces a partner experienced in Shopify B2B + NetSuite to support scoping, the build, and timeline. Caravela decides build-internally vs. partner-led.</p>
+          </li>
+
+          <li data-step="5" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="4">Late June 2026</span>
+            <h4>Leadership Review &amp; Feedback <span class="owner-tag owner-caravela">Caravela</span></h4>
+            <p>Caravela presents the demo and direction to company leadership to align early and avoid downstream rework.</p>
+          </li>
+
+          <li data-step="6" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="5">Set date</span>
+            <h4>Atlas Integration Path Confirmed <span class="owner-tag owner-caravela">Caravela</span></h4>
+            <p>Caravela confirms whether Atlas product/tasting-note data flows via NetSuite or integrates directly with Shopify. Unblocks PIM design.</p>
+          </li>
+
+          <li data-step="7" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="6">Early July 2026</span>
+            <h4>Partner Scoping &amp; SOW <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>Joint scoping session — partner, Caravela, and Shopify define Phase 1 scope of work, effort, and a confirmed build timeline to October.</p>
+          </li>
+
+          <li data-step="8" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="7">Mid July 2026</span>
+            <h4>Commercial Proposal — Shopify Plus <span class="owner-tag owner-shopify">Shopify</span></h4>
+            <p>Mercedes presents the Shopify Plus commercial proposal and agreement aligned to the Phase 1 scope.</p>
+          </li>
+
+          <li data-step="9" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="8">Late July 2026</span>
+            <h4>🤝 Contract Execution &amp; Project Kickoff <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>Shopify Plus agreement signed and partner engaged. Discovery, architecture design, and sprint planning begin immediately.</p>
+          </li>
+
+          <li data-step="10" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="9">August 2026</span>
+            <h4>Build Sprint 1 — Storefront &amp; Sample Flow <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>Gated storefront, personalized catalogs, account registration + approval workflow, and the sample-first purchasing path.</p>
+          </li>
+
+          <li data-step="11" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="10">Aug–Sep 2026</span>
+            <h4>Build Sprint 2 — NetSuite Integration &amp; Contracting <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>NetSuite ↔ Shopify sync, contracted price-list sync, invoicing approach, warehouse-release fulfillment, and Atlas/PIM data flow.</p>
+          </li>
+
+          <li data-step="12" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="11">September 2026</span>
+            <h4>UAT &amp; Beta with Select Micro-Roasters <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>A small group of trade customers tests registration, sampling, and ordering. Feedback incorporated before go-live.</p>
+          </li>
+
+          <li data-step="13" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="12">Late Sept 2026</span>
+            <h4>Launch Readiness Review <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>Jordan Murphy, Caravela, and the partner confirm production readiness. NetSuite integration validated in production; onboarding plan finalized.</p>
+          </li>
+
+          <li data-step="14" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="13">October 2026</span>
+            <h4>🎯 GO LIVE — Phase 1 Spot Portal <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>The B2B spot coffee portal launches on Shopify, layered on NetSuite. Self-service sampling and ordering live for North American micro-roasters.</p>
+          </li>
+
+          <li data-step="15" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="14">Set date</span>
+            <h4>Phase 2 Planning — Forward Contracting <span class="owner-tag owner-joint">Joint</span></h4>
+            <p>Extend the platform to the forward-contract business (~85% of volume): 3-year contracts, pre-shipment sample approval, invoice on warehouse landing — on the architecture built in Phase 1.</p>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Your Shopify Team</div>
+        <table>
+          <tr><th>Name</th><th>Role</th><th>Contact</th></tr>
+          <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, Commercial B2B</td><td>mercedes.boykin-sabalones@shopify.com</td></tr>
+          <tr><td>Jordan Murphy</td><td>Solutions Engineer, B2B Specialist</td><td>jordan.murphy@shopify.com</td></tr>
+        </table>
+        <div style="margin-top: 20px;">
+          <a href="mailto:mercedes.boykin-sabalones@shopify.com" class="btn-accent">Email Mercedes →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Resources</div>
+        <ul>
+          <li><a href="https://www.shopify.com/plus/solutions/b2b-ecommerce" target="_blank">Shopify B2B — Platform Overview →</a></li>
+          <li><a href="https://help.shopify.com/en/manual/b2b" target="_blank">Shopify B2B Documentation →</a></li>
+          <li><a href="https://help.shopify.com/en/manual/b2b/companies" target="_blank">Company Accounts — Buyer Portal Setup →</a></li>
+          <li><a href="https://help.shopify.com/en/manual/shopify-flow" target="_blank">Shopify Flow — Automation →</a></li>
+          <li><a href="https://shopify.dev/docs/api/admin-graphql" target="_blank">Admin GraphQL API (NetSuite integration) →</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /content -->
+
+<div class="wrap">
   <div class="footer">
-    <span>Caravela Coffee × Shopify Plus</span>
-    <span>mercedes.boykin-sabalones@shopify.com</span>
+    Prepared by Shopify · Caravela Coffee Mutual Action Plan · June 2026 · Confidential
   </div>
 </div>
+
+</div><!-- /main -->
 
 <script>
-if(sessionStorage.getItem('cc_auth')==='1'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block'}
-function unlock(){const pw=document.getElementById('pw').value.trim();if(pw==='0000'){sessionStorage.setItem('cc_auth','1');document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block'}else{document.getElementById('err').style.display='block'}}
+/* ── GATE ── */
+(function() {
+  if (sessionStorage.getItem('cc_auth') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  }
+})();
+
+function unlock() {
+  const pw = document.getElementById('pw').value.trim();
+  if (pw.toLowerCase() === 'caravela26') {
+    sessionStorage.setItem('cc_auth', '1');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+
+/* ── TABS ── */
+function show(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── TIMELINE ── */
+function toggleStep(el) {
+  const orig = el.getAttribute('data-original-step') || el.getAttribute('data-step');
+  if (el.classList.contains('done')) {
+    el.classList.remove('done');
+    el.setAttribute('data-step', orig);
+    el.removeAttribute('data-original-step');
+  } else {
+    el.setAttribute('data-original-step', orig);
+    el.setAttribute('data-step', '✓');
+    el.classList.add('done');
+  }
+  saveProgress();
+}
+
+function editDate(e, el) {
+  e.stopPropagation();
+  if (el.contentEditable === 'true') return;
+  el.contentEditable = 'true';
+  el.classList.add('editing');
+  if (el.textContent.trim() === 'Set date') el.textContent = '';
+  el.focus();
+  const sel = window.getSelection();
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  sel.removeAllRanges();
+  sel.addRange(range);
+
+  const finish = () => {
+    el.contentEditable = 'false';
+    el.classList.remove('editing');
+    const text = el.textContent.trim();
+    if (!text) {
+      el.textContent = 'Set date';
+      el.classList.remove('has-date');
+      el.classList.add('no-date');
+    } else {
+      el.classList.add('has-date');
+      el.classList.remove('no-date');
+    }
+    saveDates();
+  };
+
+  el.addEventListener('blur', finish, { once: true });
+  el.addEventListener('keydown', function handler(ev) {
+    if (ev.key === 'Enter' || ev.key === 'Escape') {
+      ev.preventDefault();
+      el.removeEventListener('keydown', handler);
+      el.blur();
+    }
+  });
+}
+
+function saveProgress() {
+  const done = [];
+  document.querySelectorAll('.timeline li').forEach((li, i) => {
+    if (li.classList.contains('done')) done.push(i);
+  });
+  localStorage.setItem('cc-map-progress', JSON.stringify(done));
+}
+
+function saveDates() {
+  const dates = {};
+  document.querySelectorAll('.timeline .step-date').forEach(el => {
+    const idx = el.getAttribute('data-idx');
+    const text = el.textContent.trim();
+    if (text && text !== 'Set date') dates[idx] = text;
+  });
+  localStorage.setItem('cc-map-dates', JSON.stringify(dates));
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedDates = localStorage.getItem('cc-map-dates');
+  if (savedDates) {
+    const dates = JSON.parse(savedDates);
+    document.querySelectorAll('.timeline .step-date').forEach(el => {
+      const idx = el.getAttribute('data-idx');
+      if (dates[idx]) {
+        el.textContent = dates[idx];
+        el.classList.add('has-date');
+        el.classList.remove('no-date');
+      }
+    });
+  }
+
+  const savedProgress = localStorage.getItem('cc-map-progress');
+  if (savedProgress) {
+    const doneIndices = JSON.parse(savedProgress);
+    document.querySelectorAll('.timeline li').forEach((li, i) => {
+      const isDone = doneIndices.includes(i);
+      const isAlreadyDone = li.classList.contains('done');
+      if (isDone && !isAlreadyDone) {
+        const orig = li.getAttribute('data-step');
+        li.setAttribute('data-original-step', orig);
+        li.setAttribute('data-step', '✓');
+        li.classList.add('done');
+      } else if (!isDone && isAlreadyDone) {
+        const orig = li.getAttribute('data-original-step') || li.getAttribute('data-step');
+        li.classList.remove('done');
+        li.setAttribute('data-step', orig);
+        li.removeAttribute('data-original-step');
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
