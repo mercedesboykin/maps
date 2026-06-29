@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ardmore Home Design + Blue Pheasant × Shopify</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ivory: #f6f5ee;
+    --cream: #fbfaf6;
+    --white: #ffffff;
+    --ink: #2b2f38;
+    --slate: #414650;
+    --muted: #5c606a;
+    --teal: #1f7a87;
+    --teal-bright: #66cad8;
+    --teal-soft: #e7f4f6;
+    --gold: #b08d57;
+    --border: #e4e1d6;
+    --text: #2b2f38;
+    --max: 940px;
+    --serif: Georgia, 'Cormorant Garamond', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  body { font-family: var(--sans); background: var(--ivory); color: var(--text); line-height: 1.6; }
+
+  /* GATE */
+  #gate { position: fixed; inset: 0; z-index: 9999; background: #23272f; display: flex; align-items: center; justify-content: center; }
+  .gate-box { width: 100%; max-width: 400px; padding: 2.5rem; text-align: center; }
+  .gate-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 22px; }
+  .gate-title { font-family: var(--serif); font-size: 30px; font-weight: 700; color: #fff; letter-spacing: 0.3px; margin-bottom: 8px; line-height: 1.15; }
+  .gate-sub { font-size: 13px; color: #9aa0aa; margin-bottom: 28px; }
+  .gate-box input { width: 100%; padding: 13px 16px; background: #313640; border: 1px solid #444b57; color: #fff; font-size: 14px; text-align: center; letter-spacing: 4px; outline: none; border-radius: 6px; margin-bottom: 10px; transition: border-color 0.15s; }
+  .gate-box input:focus { border-color: var(--teal-bright); }
+  .gate-box input::placeholder { letter-spacing: 2px; color: #6b727d; }
+  .gate-btn { width: 100%; padding: 13px; background: var(--teal); color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.15s; }
+  .gate-btn:hover { background: #186571; }
+  .gate-err { font-size: 12px; color: #ff7b7b; margin-top: 10px; display: none; }
+
+  /* MAIN */
+  #main { display: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* HEADER */
+  .header { background: var(--ink); border-bottom: 3px solid var(--teal-bright); position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: 0; right: 0; width: 420px; height: 100%; background: linear-gradient(135deg, transparent 45%, rgba(102,202,216,0.10)); pointer-events: none; }
+  .header .wrap { padding-top: 56px; padding-bottom: 44px; text-align: center; }
+  .header-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 16px; }
+  .header h1 { font-family: var(--serif); font-size: 48px; font-weight: 700; color: var(--white); letter-spacing: 0.2px; line-height: 1.1; }
+  .header h1 .accent { color: var(--teal-bright); font-style: italic; }
+  .header-sub { color: #aab0ba; font-size: 14px; margin-top: 14px; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .header-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; justify-content: center; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+  .badge-teal { background: var(--teal); color: white; }
+  .badge-outline { border: 1.5px solid #4a525f; color: #aab0ba; }
+
+  /* TABS */
+  .tab-nav { background: var(--slate); position: sticky; top: 0; z-index: 100; }
+  .tab-nav .wrap { display: flex; gap: 2px; overflow-x: auto; }
+  .tab-nav .wrap::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 16px 20px; border: none; background: none; cursor: pointer; font-size: 13.5px; font-weight: 600; color: #b4b8c0; border-bottom: 3px solid transparent; white-space: nowrap; letter-spacing: 0.2px; transition: color 0.15s; flex-shrink: 0; }
+  .tab-btn:hover { color: #fff; }
+  .tab-btn.active { color: var(--white); border-bottom-color: var(--teal-bright); }
+
+  /* CONTENT */
+  .content { padding: 44px 0 80px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fade 0.25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* SECTION HEADER */
+  .section-header { margin-bottom: 30px; }
+  .section-header h2 { font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--ink); letter-spacing: 0.2px; line-height: 1.15; }
+  .section-header h2 .accent { color: var(--teal); font-style: italic; }
+  .section-header p { font-size: 15px; color: var(--muted); margin-top: 10px; max-width: 660px; }
+  .divider { width: 52px; height: 3px; background: var(--gold); border-radius: 2px; margin: 14px 0 18px; }
+
+  /* CARDS */
+  .card { background: var(--cream); border-radius: 12px; padding: 26px 30px; margin-bottom: 18px; border: 1px solid var(--border); }
+  .card-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+  .card h3 { font-family: var(--serif); font-size: 21px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+  .card p { font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+  .card p + p { margin-top: 10px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  ul, ol { padding-left: 20px; }
+  li { font-size: 14.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.65; }
+  li strong { color: var(--text); }
+
+  /* CALLOUTS */
+  .callout { padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 18px 0; }
+  .callout p { font-size: 14.5px; line-height: 1.7; }
+  .callout-teal { background: var(--teal-soft); border-left: 4px solid var(--teal); }
+  .callout-teal p { color: #134e57; }
+  .callout-gold { background: #f7f1e6; border-left: 4px solid var(--gold); }
+  .callout-gold p { color: #6b5326; }
+  .callout strong { font-weight: 700; }
+
+  /* STAT ROW */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .stat { background: var(--cream); padding: 24px 26px; }
+  .stat-value { font-family: var(--serif); font-size: 32px; font-weight: 700; color: var(--ink); letter-spacing: -0.5px; line-height: 1; }
+  .stat-value .unit { font-size: 17px; color: var(--teal); }
+  .stat-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; margin-top: 8px; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--cream); border-radius: 10px; overflow: hidden; margin-bottom: 6px; }
+  th { background: var(--ink); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 700; font-size: 11px; letter-spacing: 0.7px; text-transform: uppercase; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; }
+  td:first-child { font-weight: 600; color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  .yes { color: #16895a; font-weight: 700; }
+  .no { color: #b4453a; font-weight: 600; }
+
+  /* FEATURE GRID */
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .feature-item { background: var(--cream); padding: 22px 24px; }
+  .feature-title { font-size: 14.5px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .feature-desc { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+  /* COMPETITOR */
+  .comp-card { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 26px 30px; margin-bottom: 18px; }
+  .comp-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .comp-name { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--ink); }
+  .comp-pill { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #16895a; background: #dff2e8; padding: 4px 12px; border-radius: 20px; }
+  .comp-link { display: inline-block; margin: 8px 0 12px; font-size: 13.5px; font-weight: 600; color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--teal-bright); }
+  .comp-link:hover { color: #134e57; }
+
+  /* FOOTER */
+  .footer { background: var(--ink); color: #aab0ba; padding: 36px 0; text-align: center; }
+  .footer p { font-size: 12.5px; line-height: 1.7; }
+  .footer .names { color: #fff; font-weight: 600; }
+  .footnote { font-size: 12px; color: #8a8e96; margin-top: 14px; font-style: italic; line-height: 1.6; }
+
+  @media (max-width: 720px) {
+    .header h1 { font-size: 34px; }
+    .grid-2, .feature-grid, .stat-row { grid-template-columns: 1fr; }
+    .section-header h2 { font-size: 27px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-eyebrow">Confidential — Platform Evaluation</div>
+    <div class="gate-title">Ardmore Home Design<br>+ Blue Pheasant</div>
+    <div class="gate-sub">Enter the access code to continue.</div>
+    <input type="password" id="pw" placeholder="Access code" onkeydown="if(event.key==='Enter')unlock()" aria-label="Access code">
+    <button class="gate-btn" onclick="unlock()">Unlock</button>
+    <div class="gate-err" id="err">Incorrect code. Please try again.</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <header class="header">
+    <div class="wrap">
+      <div class="header-eyebrow">Shopify Platform Evaluation</div>
+      <h1>Ardmore Home Design <span class="accent">+</span> Blue Pheasant</h1>
+      <p class="header-sub">A summary of why Shopify fits the portfolio, what we covered in the June 26 demo, and a clear breakdown of platform and payment costs — prepared for internal review with leadership.</p>
+      <div class="header-badges">
+        <span class="badge badge-teal">Prepared for Kenar Maronian</span>
+        <span class="badge badge-outline">Following the June 26 demo</span>
+        <span class="badge badge-outline">Shopify Plus</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tab-nav" aria-label="Sections">
+    <div class="wrap">
+      <button class="tab-btn active" onclick="show('why', this)">Why Shopify</button>
+      <button class="tab-btn" onclick="show('demo', this)">Demo Highlights</button>
+      <button class="tab-btn" onclick="show('pricing', this)">Payments &amp; Pricing</button>
+      <button class="tab-btn" onclick="show('competitors', this)">Competitors on Shopify</button>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="wrap">
+
+      <!-- WHY SHOPIFY -->
+      <section id="why" class="tab-panel active">
+        <div class="section-header">
+          <h2>Why <span class="accent">Shopify</span></h2>
+          <div class="divider"></div>
+          <p>The goal is to grow the retail (DTC) channel and give the team direct control over how the brand is merchandised and told online — without a developer in the loop for every change. Shopify Plus supports that across the full Ardmore portfolio: Blue Pheasant, Made Goods, Pigeon &amp; Poodle, and Burton James.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-eyebrow">The Trigger</div>
+            <h3>Own the storytelling</h3>
+            <p>Today, custom category and product-page layouts in Magento require a third-party developer for nearly every change. Shopify's drag-and-drop editor lets the merchandising team build and adjust collection pages, PDPs, and editorial content directly — the entertaining-led, lifestyle layouts the brand is known for, managed in-house.</p>
+          </div>
+          <div class="card">
+            <div class="card-eyebrow">The Mandate</div>
+            <h3>Grow the retail channel</h3>
+            <p>With leadership now prioritizing DTC, the platform needs to move quickly and convert well. Shopify ships with conversion built in — Shop Pay accelerated checkout, fast hosting, and a storefront the team can iterate on continuously rather than in dev cycles.</p>
+          </div>
+          <div class="card">
+            <div class="card-eyebrow">One Platform</div>
+            <h3>DTC and B2B together</h3>
+            <p>Shopify Plus runs both the retail storefront and native B2B wholesale — customer-specific catalogs, tiered and volume pricing, gated login, net terms, and bulk ordering — on one platform. Retail comes first; wholesale can follow in a later phase without re-platforming.</p>
+          </div>
+          <div class="card">
+            <div class="card-eyebrow">No Disruption</div>
+            <h3>Sage X3 stays the system of truth</h3>
+            <p>Shopify integrates with the existing Sage X3 (v12) environment and middleware — product, customer, pricing, and inventory data continue to live in the ERP. Shopify is the storefront and commerce layer on top, not a replacement for the operational backbone.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-gold">
+          <p><strong>Phased and low-risk.</strong> The aligned plan is retail (DTC) first, wholesale later. Shopify Plus includes dev and staging environments, so the team can build and test content and configurations safely before anything goes live.</p>
+        </div>
+      </section>
+
+      <!-- DEMO HIGHLIGHTS -->
+      <section id="demo" class="tab-panel">
+        <div class="section-header">
+          <h2>Demo <span class="accent">Highlights</span></h2>
+          <div class="divider"></div>
+          <p>What we walked through on June 26 with Kenar, Adrian, and Jordan Murphy (Shopify Solutions Engineer) — mapped to how Ardmore and Blue Pheasant operate today.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-title">Content &amp; merchandising</div>
+            <div class="feature-desc">Drag-and-drop editing for collection pages and PDPs, managed by business users. Navigation supports both content and category pages.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-title">Search &amp; discovery</div>
+            <div class="feature-desc">Synonym mapping, predictive search, and fuzzy matching so customers find products the way they actually search for them.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-title">Collection automation</div>
+            <div class="feature-desc">The Magento logic where product families trigger collection pages can be replicated with Shopify Flow or a lightweight app — automated, not manual.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-title">Native B2B wholesale</div>
+            <div class="feature-desc">Customer-specific pricing tiers and product visibility, net 30 terms, PO capture, and bulk ordering workflows — built into Plus.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-title">Checkout &amp; Shop Pay</div>
+            <div class="feature-desc">Shop Pay accelerated checkout for returning shoppers, a proven conversion driver for repeat home and tabletop buyers.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-title">AI discoverability</div>
+            <div class="feature-desc">Products become discoverable inside conversational AI (ChatGPT, Claude) via the universal commerce protocol Shopify helped define.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-title">ERP integration</div>
+            <div class="feature-desc">Connects to Sage X3 (v12) and existing middleware; the ERP remains the system of truth for product, pricing, customer, and inventory data.</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-title">Dev &amp; staging</div>
+            <div class="feature-desc">Sandbox environments for testing content and configuration changes before they reach the live storefront.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-eyebrow">Aligned in the room</div>
+          <h3>What we agreed on</h3>
+          <ul>
+            <li><strong>Sage X3 is the system of truth</strong> for all product, customer, pricing, and inventory data — Shopify integrates with it.</li>
+            <li><strong>Retail (DTC) is phase one</strong> of the roadmap; wholesale can follow.</li>
+            <li><strong>One open item to confirm</strong> internally: whether retail order-status and shipping notifications originate from Magento or the ERP.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PAYMENTS & PRICING -->
+      <section id="pricing" class="tab-panel">
+        <div class="section-header">
+          <h2>Payments &amp; <span class="accent">Pricing</span></h2>
+          <div class="divider"></div>
+          <p>There are two separate costs, and they are not stacked the way the "double fee" question suggested. Here is exactly how each works.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-eyebrow">Cost 1</div>
+          <h3>Platform fee — the cost to be on Shopify Plus</h3>
+          <p>This is the software/platform subscription. On a 3-year term it is the <strong>greater of</strong> a flat monthly minimum or a small variable rate on sales — you pay one or the other in a given month, never both. At typical retail volumes this lands at the monthly minimum the large majority of the time.</p>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-value">$2,300<span class="unit">/mo</span></div>
+            <div class="stat-label">Minimum, 3-year term</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">$2,500<span class="unit">/mo</span></div>
+            <div class="stat-label">Minimum, 1-year term</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">0.18&ndash;0.35<span class="unit">%</span></div>
+            <div class="stat-label">Variable rate (only if higher than the minimum)</div>
+          </div>
+        </div>
+
+        <table>
+          <thead><tr><th>Variable platform rate by channel</th><th>Rate</th></tr></thead>
+          <tbody>
+            <tr><td>Online DTC sales</td><td>0.35%</td></tr>
+            <tr><td>Retail / POS sales</td><td>0.25%</td></tr>
+            <tr><td>B2B / wholesale sales</td><td>0.18%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13.5px;color:var(--muted);margin:8px 0 18px;">You pay the minimum <em>or</em> the variable — whichever is higher that month. The variable only exceeds the minimum in unusually high-volume months.</p>
+
+        <div class="card">
+          <div class="card-eyebrow">Included in the platform fee</div>
+          <h3>What the subscription covers</h3>
+          <ul>
+            <li>Hosting and unlimited bandwidth</li>
+            <li>Built-in security and PCI compliance</li>
+            <li>Full native B2B toolset (customer accounts, tiered pricing, net terms)</li>
+            <li>Checkout extensibility and customization</li>
+            <li>Up to 9 expansion stores — useful across the Ardmore brand portfolio</li>
+            <li>24/7 priority Plus support and a 99.99% uptime SLA</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-eyebrow">Cost 2</div>
+          <h3>Payment processing — the cost to accept a card</h3>
+          <p>This is completely separate from the platform fee, and it is a cost you already pay today through Stripe. With Shopify Payments, online card rates are:</p>
+        </div>
+
+        <table>
+          <thead><tr><th>Shopify Payments — online card rate</th><th>Rate</th></tr></thead>
+          <tbody>
+            <tr><td>Domestic cards</td><td>2.25% + 30&cent;</td></tr>
+            <tr><td>Premium cards</td><td>2.95% + 30&cent;</td></tr>
+            <tr><td>International cards</td><td>3.25% + 30&cent;</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13.5px;color:var(--muted);margin:8px 0 18px;">For B2B, ACH bank transfer is also available with tiered rates that fall as order value rises, capped at $7.50 per transaction.</p>
+
+        <div class="callout callout-teal">
+          <p><strong>On the "double fee" question.</strong> With Shopify Payments there is no extra transaction fee taken on top of card processing — you pay the platform fee and the processing rate, and that is it. The only time an additional fee applies is if you keep a third-party gateway (such as Stripe) instead of Shopify Payments, in which case Shopify adds 0.20% on top of the gateway's own rate. Using Shopify Payments removes that 0.20% entirely. The "double fee" scenario only exists with an outside gateway.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-eyebrow">The right comparison</div>
+          <h3>Apples to apples with your current setup</h3>
+          <p>Card processing is not a new cost — it replaces what you pay Stripe today. The accurate comparison is the Shopify Payments rate against your current Stripe rate. Share your current rate and we will put the two side by side for leadership.</p>
+        </div>
+      </section>
+
+      <!-- COMPETITORS -->
+      <section id="competitors" class="tab-panel">
+        <div class="section-header">
+          <h2>Competitors <span class="accent">on Shopify</span></h2>
+          <div class="divider"></div>
+          <p>Two of the tabletop and luxury-home brands raised on the call already run on Shopify. Both are live and worth reviewing directly — including the checkout experience your own customers would get.</p>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-top">
+            <span class="comp-name">Juliska</span>
+            <span class="comp-pill">Live on Shopify</span>
+          </div>
+          <a class="comp-link" href="https://www.juliska.com" target="_blank" rel="noopener">www.juliska.com →</a>
+          <p style="font-size:14.5px;color:var(--muted);line-height:1.7;">The closest analog in the set — luxury tabletop, entertaining-led, with both wholesale and DTC. A strong reference for how a brand in this exact niche merchandises and sells on Shopify. Shop Pay accelerated checkout is live on the site.</p>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-top">
+            <span class="comp-name">Hudson Grace</span>
+            <span class="comp-pill">Live on Shopify</span>
+          </div>
+          <a class="comp-link" href="https://hudsongracesf.com/collections/all" target="_blank" rel="noopener">hudsongracesf.com →</a>
+          <p style="font-size:14.5px;color:var(--muted);line-height:1.7;">Worth a close look at how they handle <strong>collection pages and individual product pages</strong> — open a collection, then click into any item. It is a direct preview of the merchandising and layout flexibility that is hard to achieve in Magento today. Shop Pay is live here as well.</p>
+        </div>
+
+        <div class="callout callout-teal">
+          <p><strong>What to look at.</strong> On either site, add an item to the cart to see Shop Pay's one-tap checkout — the same experience returning customers would get on Blue Pheasant. Then compare the collection and product-page layouts against what the team can build and edit directly on Shopify.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Prepared by <span class="names">Mercedes Boykin-Sabalones</span> and <span class="names">Jordan Murphy</span>, Shopify.</p>
+      <p class="footnote">Confidential — prepared for Ardmore Home Design internal review. Platform and payment rates shown are standard published Shopify Plus rates and are indicative; final pricing is confirmed on the order form.</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* GATE */
+(function() {
+  if (sessionStorage.getItem('ahd_auth') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  }
+})();
+
+function unlock() {
+  const pw = document.getElementById('pw').value.trim();
+  if (pw.toLowerCase() === 'ardmore26') {
+    sessionStorage.setItem('ahd_auth', '1');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+
+/* TABS */
+function show(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
