@@ -129,6 +129,7 @@
   .owner-shopify { background: var(--accent-light); color: var(--accent-dark); }
   .owner-caravela { background: #e7efe9; color: #1f5c3f; }
   .owner-joint { background: #ece6f5; color: #5b3d8a; }
+  .owner-partner { background: #fce9d8; color: #a0561e; }
 
   /* ── DATE CHIPS ── */
   .step-date { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 12px; border-radius: 20px; margin-bottom: 8px; cursor: pointer; border: 1.5px dashed transparent; transition: border-color 0.12s, background 0.12s; min-width: 60px; line-height: 1.6; }
@@ -175,13 +176,14 @@
 <!-- HEADER -->
 <div class="header">
   <div class="wrap">
-    <div class="header-eyebrow">Mutual Action Plan · Updated June 18, 2026</div>
+    <div class="header-eyebrow">Mutual Action Plan · Updated July 8, 2026</div>
     <h1>Caravela Coffee<br><span>× Shopify Plus</span></h1>
     <div class="header-sub">Prepared by Mercedes Boykin-Sabalones · Account Executive, Shopify Commercial B2B · For Nicole Freydell, Luz Gomez &amp; the Caravela team</div>
     <div class="header-badges">
       <span class="badge badge-accent">Phase 1 · B2B Spot Coffee Portal</span>
       <span class="badge badge-outline">🎯 Target Go-Live: October 2026</span>
       <span class="badge badge-outline">NetSuite + Shopify B2B</span>
+      <span class="badge badge-outline">Partner: Triciclo MX</span>
       <span class="badge badge-outline">Confidential</span>
     </div>
   </div>
@@ -263,7 +265,7 @@
         <ul>
           <li><strong>Atlas integration path</strong> — connect product/tasting-note data via NetSuite or directly to Shopify (Caravela investigating).</li>
           <li><strong>Full-order invoicing</strong> — Shopify-native invoices vs. linked NetSuite PDFs.</li>
-          <li><strong>Implementation partner</strong> — build internally vs. with a Shopify-experienced B2B + NetSuite partner (introductions underway).</li>
+          <li><strong>Scope of work &amp; build timeline</strong> — Triciclo MX (implementation partner) and Caravela define Phase 1 SOW, effort, and confirmed build timeline at the July 14 scoping call.</li>
           <li><strong>Leadership sign-off</strong> — Caravela presenting the demo and direction to company leadership.</li>
         </ul>
       </div>
@@ -276,6 +278,7 @@
           <tr><td>Luz Gomez</td><td>IT Director (NetSuite owner)</td><td>Caravela Coffee</td></tr>
           <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, Commercial B2B</td><td>Shopify</td></tr>
           <tr><td>Jordan Murphy</td><td>Solutions Engineer, B2B Specialist</td><td>Shopify</td></tr>
+          <tr><td>Triciclo MX</td><td>Implementation Partner — Shopify B2B + NetSuite build</td><td>Triciclo MX</td></tr>
         </table>
       </div>
     </div>
@@ -366,10 +369,10 @@
             <p>Live B2B + NetSuite capabilities demo. Proposal meets ~90% of requirements; Caravela wants to move ASAP. Decisions locked on samples, module separation, and iterative launch.</p>
           </li>
 
-          <li data-step="4" onclick="toggleStep(this)">
-            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="3">Jun 23–27, 2026</span>
-            <h4>Implementation Partner Introductions <span class="owner-tag owner-shopify">Shopify</span></h4>
-            <p>Mercedes introduces a partner experienced in Shopify B2B + NetSuite to support scoping, the build, and timeline. Caravela decides build-internally vs. partner-led.</p>
+          <li class="done" data-step="✓" data-original-step="4" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="3">Jul 8, 2026</span>
+            <h4>Partner Introductions — Triciclo MX <span class="owner-tag owner-shopify">Shopify</span> <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
+            <p>Mercedes introduced Triciclo MX — a partner experienced in Shopify B2B + NetSuite — to the Caravela team. Triciclo will lead the Phase 1 build. Next: partner + merchant scope the work.</p>
           </li>
 
           <li data-step="5" onclick="toggleStep(this)">
@@ -385,9 +388,9 @@
           </li>
 
           <li data-step="7" onclick="toggleStep(this)">
-            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="6">Early July 2026</span>
-            <h4>Partner Scoping &amp; SOW <span class="owner-tag owner-joint">Joint</span></h4>
-            <p>Joint scoping session — partner, Caravela, and Shopify define Phase 1 scope of work, effort, and a confirmed build timeline to October.</p>
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="6">Jul 14, 2026</span>
+            <h4>Scope of Work Call — Triciclo × Caravela <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
+            <p>Triciclo MX and Caravela meet to define the Phase 1 scope of work — requirements walkthrough, effort estimate, and a confirmed build timeline to the October go-live.</p>
           </li>
 
           <li data-step="8" onclick="toggleStep(this)">
@@ -398,43 +401,43 @@
 
           <li data-step="9" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="8">Late July 2026</span>
-            <h4>🤝 Contract Execution &amp; Project Kickoff <span class="owner-tag owner-joint">Joint</span></h4>
-            <p>Shopify Plus agreement signed and partner engaged. Discovery, architecture design, and sprint planning begin immediately.</p>
+            <h4>🤝 Contract Execution &amp; Project Kickoff <span class="owner-tag owner-shopify">Shopify</span> <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
+            <p>Shopify Plus agreement signed and Triciclo MX engaged. Discovery, architecture design, and sprint planning begin immediately.</p>
           </li>
 
           <li data-step="10" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="9">August 2026</span>
-            <h4>Build Sprint 1 — Storefront &amp; Sample Flow <span class="owner-tag owner-joint">Joint</span></h4>
+            <h4>Build Sprint 1 — Storefront &amp; Sample Flow <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
             <p>Gated storefront, personalized catalogs, account registration + approval workflow, and the sample-first purchasing path.</p>
           </li>
 
           <li data-step="11" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="10">Aug–Sep 2026</span>
-            <h4>Build Sprint 2 — NetSuite Integration &amp; Contracting <span class="owner-tag owner-joint">Joint</span></h4>
+            <h4>Build Sprint 2 — NetSuite Integration &amp; Contracting <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
             <p>NetSuite ↔ Shopify sync, contracted price-list sync, invoicing approach, warehouse-release fulfillment, and Atlas/PIM data flow.</p>
           </li>
 
           <li data-step="12" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="11">September 2026</span>
-            <h4>UAT &amp; Beta with Select Micro-Roasters <span class="owner-tag owner-joint">Joint</span></h4>
+            <h4>UAT &amp; Beta with Select Micro-Roasters <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
             <p>A small group of trade customers tests registration, sampling, and ordering. Feedback incorporated before go-live.</p>
           </li>
 
           <li data-step="13" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="12">Late Sept 2026</span>
-            <h4>Launch Readiness Review <span class="owner-tag owner-joint">Joint</span></h4>
-            <p>Jordan Murphy, Caravela, and the partner confirm production readiness. NetSuite integration validated in production; onboarding plan finalized.</p>
+            <h4>Launch Readiness Review <span class="owner-tag owner-shopify">Shopify</span> <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
+            <p>Jordan Murphy, Caravela, and Triciclo MX confirm production readiness. NetSuite integration validated in production; onboarding plan finalized.</p>
           </li>
 
           <li data-step="14" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="13">October 2026</span>
-            <h4>🎯 GO LIVE — Phase 1 Spot Portal <span class="owner-tag owner-joint">Joint</span></h4>
+            <h4>🎯 GO LIVE — Phase 1 Spot Portal <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
             <p>The B2B spot coffee portal launches on Shopify, layered on NetSuite. Self-service sampling and ordering live for North American micro-roasters.</p>
           </li>
 
           <li data-step="15" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="14">Set date</span>
-            <h4>Phase 2 Planning — Forward Contracting <span class="owner-tag owner-joint">Joint</span></h4>
+            <h4>Phase 2 Planning — Forward Contracting <span class="owner-tag owner-shopify">Shopify</span> <span class="owner-tag owner-partner">Triciclo</span> <span class="owner-tag owner-caravela">Caravela</span></h4>
             <p>Extend the platform to the forward-contract business (~85% of volume): 3-year contracts, pre-shipment sample approval, invoice on warehouse landing — on the architecture built in Phase 1.</p>
           </li>
 
@@ -471,7 +474,7 @@
 
 <div class="wrap">
   <div class="footer">
-    Prepared by Shopify · Caravela Coffee Mutual Action Plan · June 2026 · Confidential
+    Prepared by Shopify · Caravela Coffee Mutual Action Plan · July 2026 · Confidential
   </div>
 </div>
 
